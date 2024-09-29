@@ -26,7 +26,7 @@
 1. Клонируйте репозиторий:
 
    ```bash
-   git clone https://github.com/yourusername/cms-quickduck.git
+   git clone https://github.com/Viacheslav1998/cms-quickduck.git
 
 2. Перейдите в папку проекта и установите зависимости:
 
@@ -68,6 +68,8 @@ axios.get('/api/pages')
   .catch(error => {
     console.error(error);
   });
+
+
 
 📜 Лицензия
 
