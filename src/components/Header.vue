@@ -9,7 +9,7 @@ export default defineComponent({
 <template>
 
   <div class="container">
-    <h1 class="logo">CMS <span style="font-weight: 100; font-size: 14px;">Minimalizm | Управление сайтом: Quickduck</span></h1>
+    <h1 class="logo">CMS <span style="font-weight: 400; font-size: 14px;">Minimalizm | Управление сайтом: Quickduck</span></h1>
   </div>
 
    <div class="container navi">
