@@ -11,7 +11,6 @@ export default defineComponent({
     };
   },
 })
-
 </script>
 
 <template>
@@ -19,26 +18,23 @@ export default defineComponent({
     <div class="name-page">
       <h2>Главная</h2>
     </div>
-
-    <div>
-      <p>тут можно установить какой то виджет
-        время. календарь. погоду.место нахождение курс валют
-      </p>
+    <div class="tools">
+      <p>Твои инструменты:</p>
     </div>
-
     <div>
       <div>
         <VueDatePicker v-model="date" inline auto-apply :dark="true" />
-        <p>Выбранная дата: {{ date }}</p>
       </div>
-  </div>
-
+    </div>
   </div>
 </template>
 
 <style scoped>
+.tools {
+  margin-top: 15px;
+}
 p {
-  color: white;
+  color: grey;
 }
 .name-page {
   margin-top: 20px;
