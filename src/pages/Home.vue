@@ -5,11 +5,26 @@ export default defineComponent({
   name: 'Home',
   setup() {
     const date = ref(new Date().toISOString().substring(0, 10))
-
     return {
       date,
     };
   },
+  data() {
+    return {
+      currentTime: new Date().toLocaleTimeString()
+    }
+  },
+  methods: {
+    updateTime() {
+      this.currentTime = new Date().toLocaleTimeString();
+    }
+  },
+  mounted() {
+    this.timer = setInterval(this.updateTime, 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.timer);
+  }
 })
 </script>
 
@@ -21,9 +36,12 @@ export default defineComponent({
     <div class="tools">
       <p>Твои инструменты:</p>
     </div>
-    <div>
+    <div class="d-flex justify-content-start sp">
       <div>
         <VueDatePicker v-model="date" inline auto-apply :dark="true" />
+      </div>
+      <div class="time-widget">
+        <p>{{ currentTime }}</p>
       </div>
     </div>
   </div>
@@ -42,5 +60,17 @@ p {
   color: silver;
   border: 1px solid grey;
 }
-
+.time-widget {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+}
+.time-widget p {
+  background-color: #005cb2;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;}
+.sp {
+  background-color: #333;
+}
 </style>
