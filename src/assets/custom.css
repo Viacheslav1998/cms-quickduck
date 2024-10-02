@@ -1,3 +1,8 @@
 body {
   background-color: #212121; }
-  
+
+h1, h2, h3, h4, h5, h6, label {
+  color: white; }
+
+label {
+  font-size: 20px;}

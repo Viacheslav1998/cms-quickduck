@@ -4,7 +4,7 @@
   <div class="container">
     <div class="footer">
       <p><span style="color: silver;">Подвал </span><br>тут бывает много чего интерессного<br>
-        <span style="color: silver">Разрабатывает - Вячеслав</span>
+        <span style="color: silver;">Разрабатывает - Вячеслав</span>
       </p>
     </div>
   </div>
