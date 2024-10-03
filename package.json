@@ -12,6 +12,9 @@
     "@popperjs/core": "^2.11.8",
     "@vuepic/vue-datepicker": "^9.0.3",
     "bootstrap": "^4.6.0",
+    "highlight.js": "^11.10.0",
+    "quill": "^2.0.2",
+    "trix": "^2.1.5",
     "vue": "^3.4.37",
     "vue-router": "^4.4.5"
   },
