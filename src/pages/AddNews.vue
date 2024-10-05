@@ -1,9 +1,22 @@
 <script>
 import { defineComponent } from 'vue'
+import Editor from '@tinymce/tinymce-vue';
 
 export default defineComponent({
   name: 'AddNews',
+  components: {
+    'editor': Editor
+  }
 })
+
+function get_data() {
+  fetch('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => response.json())
+    .then(json => console.log(json))
+}
+
+get_data();
+
 </script>
 
 <template>
@@ -24,7 +37,32 @@ export default defineComponent({
           <small id="nameHelp" class="form-text text-muted">Описание должно быть не большим - достаточно 255 символов - коротко о главном</small>
         </div>
         
-        <button type="submit" class="btn btn-primary">Создать</button>
+        <div>
+          <editor
+            api-key="0dlmagrtkkct366u3iv3bopx8ha1foy0mqtudu6p0tb6p0wr"
+            :init="{
+              toolbar_mode: 'sliding',
+              plugins: [
+                // Core editing features
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                // Your account includes a free trial of TinyMCE premium features
+                // Try the most popular premium features until Oct 19, 2024:
+                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+              ],
+              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+              tinycomments_mode: 'embedded',
+              tinycomments_author: 'Author name',
+              mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+              ],
+              ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+            }"
+            initial-value="Давай пиши !"
+          />
+        </div>
+        <div class="space"></div>
+        <button type="submit" class="btn btn-danger">Создать</button>
       </form>
     </div>
   </div>
@@ -35,6 +73,11 @@ export default defineComponent({
   margin: 50px auto;
   padding: 20px;
   border: 1px solid grey;
+}
+
+.space {
+  width: 100%;
+  height: 20px;
 }
 
 </style>

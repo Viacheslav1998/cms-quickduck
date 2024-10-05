@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@tinymce/tinymce-vue": "^4.0.7",
     "@vuepic/vue-datepicker": "^9.0.3",
     "bootstrap": "^4.6.0",
     "highlight.js": "^11.10.0",
