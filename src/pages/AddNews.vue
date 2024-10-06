@@ -17,6 +17,41 @@ function get_data() {
 
 get_data();
 
+
+const add = function (a, b) {
+  return a + b;
+}
+
+const addx = (a, b) => a + b;
+
+const square = x => x * x;
+
+const gg = () => 'gg';
+
+const multiply = (a, b) => {
+  const result = a * b;
+  return result;
+}
+
+
+function exp(sp1, sp2, name, email) {
+  return [sp1, sp2, name, email];
+}
+console.log(exp(1, 2,'Slavik', 'Nice@mail.ru'));
+
+// object
+const name = "Orange";
+const fruct = "carrots";
+const person = function() {
+  return {
+      name,
+      fruct
+    };
+}
+console.log(person());
+
+
+
 </script>
 
 <template>
