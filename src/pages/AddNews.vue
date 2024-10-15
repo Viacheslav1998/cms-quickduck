@@ -72,4 +72,11 @@ export default defineComponent({
   height: 20px;
 }
 
+.name-page {
+  margin-top: 20px;
+  padding: 20px;
+  color: silver;
+  border: 1px solid grey;
+}
+
 </style>

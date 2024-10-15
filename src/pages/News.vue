@@ -9,6 +9,17 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <h2>Управление новостями</h2>
+    <div class="name-page">
+      <h2>Управление новостями</h2>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.name-page {
+  margin-top: 20px;
+  padding: 20px;
+  color: silver;
+  border: 1px solid grey;
+}
+</style>
