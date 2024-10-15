@@ -12,6 +12,22 @@ export default defineComponent({
     <div class="name-page">
       <h2>Управление новостями</h2>
     </div>
+    <div class="custom-space">
+      <div class="news-box">
+        <div class="news">
+          <div class="imagen">
+            <img src="" alt="attention">
+          </div>
+          <div class="content-news">
+            <h3>Названия новости</h3>
+            <p>и какое то описание из каких то слов что бы было просто интерессное что то для чего то</p>
+          </div>
+          <div class="move">
+            <a href="#">Перейти к новости</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,5 +37,13 @@ export default defineComponent({
   padding: 20px;
   color: silver;
   border: 1px solid grey;
+}
+.custom-space {
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid grey;
+}
+.news-box {
+  color: white;
 }
 </style>
