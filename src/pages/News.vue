@@ -18,12 +18,14 @@ export default defineComponent({
           <div class="imagen">
             <img src="/public/images/palm.jpg" alt="attention">
           </div>
-          <div class="content-news">
+          <div class="content-news d-flex flex-column justify-content-center">
             <h3>Названия новости</h3>
             <p>и какое то описание из каких то слов что бы было просто интерессное что то для чего то</p>
           </div>
-          <div class="move">
-            <a href="#">Перейти к новости</a>
+          <div class="move d-flex flex-column justify-content-center">
+            <div><a href="#" class="link">Перейти к новости</a></div>
+            <div><a href="#" class="edt">Редактировать</a></div>
+            <div><a href="#" class="danger">Удалить</a></div>
           </div>
         </div>
       </div>
@@ -41,9 +43,30 @@ export default defineComponent({
 .custom-space {
   margin: 50px auto;
   padding: 20px;
-  border: 1px solid grey;
+  background-color: #3C3C3C;
 }
 .news-box {
-  color: white;
+  color: white;}
+.imagen {
+  width: 100px;
+  height: 100px;
+  background-color: black;
 }
+.imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.content-news {
+  margin: 0 15px;}
+.move {
+  padding: 0 20px;}
+/* links */
+.danger {color: #EB4C42;}
+.danger:hover {color:red;}
+.edt {color: #318CE7;}
+.edt:hover { color: #00A9E7;}
+.link { color: silver;}
+.link:hover { color: white;}
+/* end linkg */
 </style>
