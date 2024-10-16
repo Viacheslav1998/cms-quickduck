@@ -5,6 +5,33 @@ export default defineComponent({
   name: 'News',
 })
 
+async function getData() {
+  const url = "http://quickduck.com/test-data";
+  try {
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const text = await response.text();  // Получаем ответ как текст
+    console.log(text);  // Выводим текст в консоль для проверки
+    
+    try {
+      const json = JSON.parse(text);  // Пробуем парсить текст как JSON
+      console.log(json);  // Если удастся, выводим результат
+    } catch (parseError) {
+      console.error('Ошибка парсинга JSON:', parseError.message);  // Ошибка при парсинге
+    }
+    
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+getData();
+
+
 </script>
 
 <template>
