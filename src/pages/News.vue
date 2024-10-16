@@ -13,6 +13,7 @@ export default defineComponent({
       <h2>Управление новостями</h2>
     </div>
     <div class="custom-space">
+
       <div class="news-box">
         <div class="news d-flex flex-row">
           <div class="imagen">
@@ -29,6 +30,41 @@ export default defineComponent({
           </div>
         </div>
       </div>
+
+      <div class="news-box">
+        <div class="news d-flex flex-row">
+          <div class="imagen">
+            <img src="/public/images/palm.jpg" alt="attention">
+          </div>
+          <div class="content-news d-flex flex-column justify-content-center">
+            <h3>Названия новости</h3>
+            <p>и какое то описание из каких то слов что бы было просто интерессное что то для чего то</p>
+          </div>
+          <div class="move d-flex flex-column justify-content-center">
+            <div><a href="#" class="link">Перейти к новости</a></div>
+            <div><a href="#" class="edt">Редактировать</a></div>
+            <div><a href="#" class="danger">Удалить</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-box">
+        <div class="news d-flex flex-row">
+          <div class="imagen">
+            <img src="/public/images/palm.jpg" alt="attention">
+          </div>
+          <div class="content-news d-flex flex-column justify-content-center">
+            <h3>Названия новости</h3>
+            <p>и какое то описание из каких то слов что бы было просто интерессное что то для чего то</p>
+          </div>
+          <div class="move d-flex flex-column justify-content-center">
+            <div><a href="#" class="link">Перейти к новости</a></div>
+            <div><a href="#" class="edt">Редактировать</a></div>
+            <div><a href="#" class="danger">Удалить</a></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -42,15 +78,17 @@ export default defineComponent({
 }
 .custom-space {
   margin: 50px auto;
-  padding: 20px;
-  background-color: #3C3C3C;
 }
 .news-box {
-  color: white;}
+  margin: 20px 0;
+  color: white;
+  background-color: #3C3C3C;
+}
+
 .imagen {
+  padding: 5px;
   width: 100px;
   height: 100px;
-  background-color: black;
 }
 .imagen img {
   width: 100%;
