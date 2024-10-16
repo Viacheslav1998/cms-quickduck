@@ -14,9 +14,9 @@ export default defineComponent({
     </div>
     <div class="custom-space">
       <div class="news-box">
-        <div class="news">
+        <div class="news d-flex flex-row">
           <div class="imagen">
-            <img src="" alt="attention">
+            <img src="/public/images/palm.jpg" alt="attention">
           </div>
           <div class="content-news">
             <h3>Названия новости</h3>
