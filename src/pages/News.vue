@@ -7,16 +7,16 @@ export default defineComponent({
     const news = ref([])
 
     async function getData() {
-      const url = 'https://jsonplaceholder.typicode.com/posts'
+      const url = 'http://quickduck.com/test-data'
       try {
         const response = await fetch(url)
         if (!response.ok) {
           throw new Error(`Статус ответа: ${response.status}`)
         }
-
+        
         const data = await response.json()
-        console.log(data)
         return data;
+        
       } catch (error) {
         console.error('Ошибка: ', error.message)
       }
@@ -38,9 +38,14 @@ export default defineComponent({
   
   <div>
 
-    <ul style="color: white;">
+    <ul style="color: seagreen;">
       <li v-for="item in news" :key="item.id">
-        {{ item.body }}
+        <pre style="color: white;">
+        {{ item.id }}
+        {{ item.title }} 
+        {{ item.name }} 
+        {{ item.desk }} 
+      </pre>
       </li>
     </ul>
 
