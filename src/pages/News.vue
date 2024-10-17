@@ -1,40 +1,51 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 
 export default defineComponent({
   name: 'News',
-})
+  setup() {
+    const news = ref([])
 
-async function getData() {
-  const url = "http://quickduck.com/test-data";
-  try {
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
+    async function getData() {
+      const url = 'https://jsonplaceholder.typicode.com/posts'
+      try {
+        const response = await fetch(url)
+        if (!response.ok) {
+          throw new Error(`Статус ответа: ${response.status}`)
+        }
+
+        const data = await response.json()
+        console.log(data)
+        return data;
+      } catch (error) {
+        console.error('Ошибка: ', error.message)
+      }
     }
 
-    const text = await response.text();  // Получаем ответ как текст
-    console.log(text);  // Выводим текст в консоль для проверки
-    
-    try {
-      const json = JSON.parse(text);  // Пробуем парсить текст как JSON
-      console.log(json);  // Если удастся, выводим результат
-    } catch (parseError) {
-      console.error('Ошибка парсинга JSON:', parseError.message);  // Ошибка при парсинге
-    }
-    
-  } catch (error) {
-    console.error('Error:', error.message);
+    onMounted(async () => {
+      news.value = await getData()
+    })
+
+    return {
+      news
+    };
   }
-}
-
-getData();
-
+});
 
 </script>
 
 <template>
+  
+  <div>
+
+    <ul style="color: white;">
+      <li v-for="item in news" :key="item.id">
+        {{ item.body }}
+      </li>
+    </ul>
+
+  </div>
+<br>
   <div class="container">
     <div class="name-page">
       <h2>Управление новостями</h2>
