@@ -35,10 +35,13 @@ export default defineComponent({
 </script>
 
 <template>
-  
-  <div>
+  <div class="container">
+    <div class="name-page">
+      <h2>Управление новостями</h2>
+    </div>
+    <div class="custom-space">
 
-    <ul style="color: seagreen;">
+      <!-- <ul style="color: seagreen;">
       <li v-for="item in news" :key="item.id">
         <pre style="color: white;">
         {{ item.id }}
@@ -47,15 +50,7 @@ export default defineComponent({
         {{ item.desk }} 
       </pre>
       </li>
-    </ul>
-
-  </div>
-<br>
-  <div class="container">
-    <div class="name-page">
-      <h2>Управление новостями</h2>
-    </div>
-    <div class="custom-space">
+    </ul> -->
 
       <div class="news-box">
         <div class="news d-flex flex-row">

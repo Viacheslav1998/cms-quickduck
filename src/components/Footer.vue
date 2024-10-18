@@ -3,8 +3,8 @@
 <template>
   <div class="container">
     <div class="footer">
-      <p><span style="color: silver;">Подвал </span><br>тут бывает много чего интерессного<br>
-        <span style="color: silver;">Разрабатывает - Вячеслав</span>
+      <p><span>Подвал </span><br>совершенствовать свое приложение без конца - это не предел<br><hr>
+        <span style="color:#F4CA16; background-color: #212121; padding: 5px; border-radius: 5px; margin-top: 10px;"><b>Разрабатывает - Вячеслав</b></span>
       </p>
     </div>
   </div>
@@ -15,7 +15,8 @@
   padding: 20px 10px 1px 10px;
   margin-top: 20px;
   background-color: #a53131;
-  color: silver;
+  color: white;
+  font-family: Calibri;
 }
 
 </style>
