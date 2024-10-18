@@ -1,14 +1,52 @@
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue';
 import Editor from '@tinymce/tinymce-vue';
 
 export default defineComponent({
   name: 'AddNews',
   components: {
     'editor': Editor
-  }
-})
+  },
+  setup() {
+    const name = ref('');
+    const title = ref('');
+    const desk = ref('');
 
+    const submitForm = async () => {
+      try {
+        const formData = {
+          name: name.value,
+          title: title.value,
+          desk: desk.value
+        };
+
+        const response = await fetch('http://localhost:port/api/news', {  // Укажите ваш endpoint
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          console.log('Новость добавлена:', data);
+        } else {
+          console.error('Ошибка:', data);
+        }
+      } catch (error) {
+        console.error('Ошибка при отправке:', error);
+      }
+    };
+
+    return {
+      name,
+      title,
+      desk,
+      submitForm
+    };
+  }
+});
 </script>
 
 <template>
@@ -17,20 +55,21 @@ export default defineComponent({
       <h2>Добавить Новость</h2>
     </div>
     <div class="custom-space">
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="form-group">
           <label for="nameNews">Названия Новости</label>
-          <input type="name" class="form-control" id="nameNews" aria-describedby="nameNews">
+          <input v-model="name" type="name" class="form-control" id="nameNews" aria-describedby="nameNews">
           <small id="nameHelp" class="form-text text-muted">то что привлечет внимание</small>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Описание Новости</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <input v-model="title" type="title" class="form-control" id="exampleInputPassword1">
           <small id="nameHelp" class="form-text text-muted">Описание должно быть не большим - достаточно 255 символов - коротко о главном</small>
         </div>
         
         <div>
           <editor
+            v-model="desk"
             api-key="0dlmagrtkkct366u3iv3bopx8ha1foy0mqtudu6p0tb6p0wr"
             :init="{
               toolbar_mode: 'sliding',

@@ -40,69 +40,28 @@ export default defineComponent({
       <h2>Управление новостями</h2>
     </div>
     <div class="custom-space">
-
-      <!-- <ul style="color: seagreen;">
-      <li v-for="item in news" :key="item.id">
-        <pre style="color: white;">
-        {{ item.id }}
-        {{ item.title }} 
-        {{ item.name }} 
-        {{ item.desk }} 
-      </pre>
-      </li>
-    </ul> -->
-
-      <div class="news-box">
-        <div class="news d-flex flex-row">
+      <div class="news-box" v-for="item in news" :key="item.id">
+        <div class="news d-flex flex-row justify-content-start">
           <div class="imagen">
             <img src="/public/images/palm.jpg" alt="attention">
           </div>
-          <div class="content-news d-flex flex-column justify-content-center">
-            <h3>Названия новости</h3>
-            <p>и какое то описание из каких то слов что бы было просто интерессное что то для чего то</p>
+          <div class="d-flex flex-column justify-content-start" style="width: 80%;">
+            <div class="content-news d-flex flex-column">
+              <h3>{{ item.name }}</h3>
+              <i>номер поста: {{ item.id }}</i>
+              <p>{{ item.desk }}</p>
+            </div>
           </div>
-          <div class="move d-flex flex-column justify-content-center">
-            <div><a href="#" class="link">Перейти к новости</a></div>
-            <div><a href="#" class="edt">Редактировать</a></div>
-            <div><a href="#" class="danger">Удалить</a></div>
+
+          <div class="d-flex flex-row" style="background-color: #245577;">
+            <div class="move d-flex flex-column justify-content-center">
+              <div><a href="#" class="link">перейти...</a></div>
+              <div><a href="#" class="edt">Редактировать</a></div>
+              <div><a href="#" class="danger">Удалить</a></div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="news-box">
-        <div class="news d-flex flex-row">
-          <div class="imagen">
-            <img src="/public/images/palm.jpg" alt="attention">
-          </div>
-          <div class="content-news d-flex flex-column justify-content-center">
-            <h3>Названия новости</h3>
-            <p>и какое то описание из каких то слов что бы было просто интерессное что то для чего то</p>
-          </div>
-          <div class="move d-flex flex-column justify-content-center">
-            <div><a href="#" class="link">Перейти к новости</a></div>
-            <div><a href="#" class="edt">Редактировать</a></div>
-            <div><a href="#" class="danger">Удалить</a></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="news-box">
-        <div class="news d-flex flex-row">
-          <div class="imagen">
-            <img src="/public/images/palm.jpg" alt="attention">
-          </div>
-          <div class="content-news d-flex flex-column justify-content-center">
-            <h3>Названия новости</h3>
-            <p>и какое то описание из каких то слов что бы было просто интерессное что то для чего то</p>
-          </div>
-          <div class="move d-flex flex-column justify-content-center">
-            <div><a href="#" class="link">Перейти к новости</a></div>
-            <div><a href="#" class="edt">Редактировать</a></div>
-            <div><a href="#" class="danger">Удалить</a></div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
@@ -124,7 +83,9 @@ export default defineComponent({
 }
 
 .imagen {
-  padding: 5px;
+  background-color: #837969;
+  padding: 5px 5px 5px 5px;
+  margin-top: 2px;
   width: 100px;
   height: 100px;
 }
@@ -140,8 +101,8 @@ export default defineComponent({
 /* links */
 .danger {color: #EB4C42;}
 .danger:hover {color:red;}
-.edt {color: #318CE7;}
-.edt:hover { color: #00A9E7;}
+.edt {color: #E6BF0B;}
+.edt:hover { color: #F07427;}
 .link { color: silver;}
 .link:hover { color: white;}
 /* end linkg */
