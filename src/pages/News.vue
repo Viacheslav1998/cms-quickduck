@@ -68,8 +68,7 @@ export default defineComponent({
         </div>
       </div>
     </div>
-    <br>
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger m-top" v-else>
         Данных не найдено
     </div>
   </div>
@@ -115,4 +114,5 @@ export default defineComponent({
 .link { color: silver;}
 .link:hover { color: white;}
 /* end linkg */
+.m-top {margin-top: 20px;}
 </style>
