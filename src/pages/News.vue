@@ -48,7 +48,7 @@ export default defineComponent({
       <div class="news-box" v-for="item in news" :key="item.id">
         <div class="news d-flex flex-row justify-content-start">
           <div class="imagen">
-            <img src="/public/images/palm.jpg" alt="attention">
+            <img src="/images/palm.jpg" alt="attention">
           </div>
           <div class="d-flex flex-column justify-content-start" style="width: 80%;">
             <div class="content-news d-flex flex-column">
