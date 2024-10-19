@@ -7,7 +7,7 @@ export default defineComponent({
     const news = ref([])
 
     async function getData() {
-      const url = 'http://quickduck.com/test-data'
+      const url = 'http://quickduck.com/news'
       try {
         const response = await fetch(url)
         if (!response.ok) {
@@ -15,7 +15,11 @@ export default defineComponent({
         }
         
         const data = await response.json()
+        
+        console.log(typeof data)
+        
         return data;
+
         
       } catch (error) {
         console.error('Ошибка: ', error.message)
@@ -39,7 +43,8 @@ export default defineComponent({
     <div class="name-page">
       <h2>Управление новостями</h2>
     </div>
-    <div class="custom-space">
+
+    <div class="custom-space" v-if="Object.keys(news).length !== 0">
       <div class="news-box" v-for="item in news" :key="item.id">
         <div class="news d-flex flex-row justify-content-start">
           <div class="imagen">
@@ -62,6 +67,10 @@ export default defineComponent({
           </div>
         </div>
       </div>
+    </div>
+    <br>
+    <div class="alert alert-danger" role="alert">
+        Данных не найдено
     </div>
   </div>
 </template>

@@ -20,7 +20,7 @@ export default defineComponent({
           desk: desk.value
         };
 
-        const response = await fetch('http://localhost:port/api/news', {  // Укажите ваш endpoint
+        const response = await fetch('http://quickduck/news', { 
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export default defineComponent({
     return {
       name,
       title,
-      desk,
+     
       submitForm
     };
   }
@@ -62,14 +62,14 @@ export default defineComponent({
           <small id="nameHelp" class="form-text text-muted">то что привлечет внимание</small>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Описание Новости</label>
-          <input v-model="title" type="title" class="form-control" id="exampleInputPassword1">
+          <label for="title">Описание Новости</label>
+          <input v-model="title" type="title" class="form-control" id="title">
           <small id="nameHelp" class="form-text text-muted">Описание должно быть не большим - достаточно 255 символов - коротко о главном</small>
         </div>
         
         <div>
           <editor
-            v-model="desk"
+           
             api-key="0dlmagrtkkct366u3iv3bopx8ha1foy0mqtudu6p0tb6p0wr"
             :init="{
               toolbar_mode: 'sliding',
