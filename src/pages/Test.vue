@@ -1,59 +1,72 @@
 <template>
   <div class="news-form">
     <h2>Добавить новость</h2>
+
+    <div v-if="responseMessage" class="alert" :class="responseStatus">{{ responseMessage }}</div>
+
     <form @submit.prevent="submitForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Название</label>
+        <input type="text" v-model="name" id="name" class="form-control" required />
+      </div>
+
       <div class="mb-3">
         <label for="title" class="form-label">Заголовок</label>
         <input type="text" v-model="title" id="title" class="form-control" required />
       </div>
+
       <div class="mb-3">
-        <label for="content" class="form-label">Содержимое</label>
-        <textarea v-model="content" id="content" class="form-control" required></textarea>
+        <label for="desk" class="form-label">Содержимое</label>
+        <textarea v-model="desk" id="desk" class="form-control" required></textarea>
       </div>
+
       <button type="submit" class="btn btn-primary">Отправить</button>
     </form>
-    <div v-if="responseMessage" class="mt-3">
-      <p>{{ responseMessage }}</p>
-    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
+const name = ref('');
 const title = ref('');
-const content = ref('');
+const desk = ref('');
+
 const responseMessage = ref('');
+const responseStatus = ref('');
 
-const submitForm = () => {
-  const data = {
-    title: title.value,
-    content: content.value,
-  };
+const submitForm = async () => {
+  const formData = new FormData();
+  formData.append('name', name.value);
+  formData.append('title', title.value);
+  formData.append('desk', desk.value);
 
-  fetch('http://quickduck/api/news', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Сеть не отвечает');
+  try {
+    const response = await fetch('http://quickduck.com/api/news', {
+      method: 'POST',
+      body: formData
+    });
+
+    const data = await response.json();
+
+    // Проверяем статус ответа и выводим сообщение
+    if (data.status === 'success') {
+      responseMessage.value = data.message;
+      responseStatus.value = 'alert-success';
+    } else {
+      responseMessage.value = data.message;
+      responseStatus.value = 'alert-danger';
     }
-    return response.json();
-  })
-  .then(data => {
-    responseMessage.value = 'Успех: ' + JSON.stringify(data);
-    // Очистить поля после успешной отправки
+
+    // Очистка формы после успешной отправки
+    name.value = '';
     title.value = '';
-    content.value = '';
-  })
-  .catch((error) => {
-    console.error('Ошибка:', error);
-    responseMessage.value = 'Ошибка: ' + error.message;
-  });
+    desk.value = '';
+
+  } catch (error) {
+    responseMessage.value = 'Ошибка при отправке данных.';
+    responseStatus.value = 'alert-danger';
+  }
 };
 </script>
 
@@ -64,6 +77,9 @@ const submitForm = () => {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: grey;
+}
+.alert {
+  margin-bottom: 20px;
 }
 </style>
