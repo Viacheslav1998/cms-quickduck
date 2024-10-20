@@ -7,7 +7,7 @@ export default defineComponent({
     const news = ref([])
 
     async function getData() {
-      const url = 'http://quickduck.com/news'
+      const url = 'http://quickduck.com/api/news'
       try {
         const response = await fetch(url)
         if (!response.ok) {
@@ -48,7 +48,7 @@ export default defineComponent({
       <div class="news-box" v-for="item in news" :key="item.id">
         <div class="news d-flex flex-row justify-content-start">
           <div class="imagen">
-            <img src="/images/palm.jpg" alt="attention">
+            <img src="/public/images/palm.jpg" alt="attention">
           </div>
           <div class="d-flex flex-column justify-content-start" style="width: 80%;">
             <div class="content-news d-flex flex-column">
@@ -68,7 +68,8 @@ export default defineComponent({
         </div>
       </div>
     </div>
-    <div class="alert alert-danger m-top" v-else>
+    
+    <div class="alert alert-danger m-top"  v-else>
         Данных не найдено
     </div>
   </div>
@@ -114,5 +115,5 @@ export default defineComponent({
 .link { color: silver;}
 .link:hover { color: white;}
 /* end linkg */
-.m-top {margin-top: 20px;}
+.m-top {margin-top: 1px;}
 </style>

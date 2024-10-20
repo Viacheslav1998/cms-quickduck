@@ -1,66 +1,69 @@
-<script>
+<template>
+  <div class="news-form">
+    <h2>Добавить новость</h2>
+    <form @submit.prevent="submitForm">
+      <div class="mb-3">
+        <label for="title" class="form-label">Заголовок</label>
+        <input type="text" v-model="title" id="title" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="content" class="form-label">Содержимое</label>
+        <textarea v-model="content" id="content" class="form-control" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+    <div v-if="responseMessage" class="mt-3">
+      <p>{{ responseMessage }}</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
 import { ref } from 'vue';
 
-export default {
-  setup() {
-    const name = ref('');
-    const title = ref('');
-    const desk = ref('');
+const title = ref('');
+const content = ref('');
+const responseMessage = ref('');
 
-    const submitForm = async () => {
-      try {
-        const formData = {
-          name: name.value,
-          title: title.value,
-          desk: desk.value
-        };
+const submitForm = () => {
+  const data = {
+    title: title.value,
+    content: content.value,
+  };
 
-        const response = await fetch('http://quickduck/news', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData)
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          console.log('Success:', data);
-        } else {
-          console.error('Error:', data);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    return {
-      name,
-      title,
-      desk,
-      submitForm
-    };
-  }
+  fetch('http://quickduck/api/news', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Сеть не отвечает');
+    }
+    return response.json();
+  })
+  .then(data => {
+    responseMessage.value = 'Успех: ' + JSON.stringify(data);
+    // Очистить поля после успешной отправки
+    title.value = '';
+    content.value = '';
+  })
+  .catch((error) => {
+    console.error('Ошибка:', error);
+    responseMessage.value = 'Ошибка: ' + error.message;
+  });
 };
 </script>
 
-<template>
-  <div class="container">
-    <h2>Добавить Новость</h2>
-    <form @submit.prevent="submitForm">
-      <div class="form-group">
-        <label for="nameNews">Название Новости</label>
-        <input v-model="name" type="text" id="nameNews" />
-      </div>
-      <div class="form-group">
-        <label for="titleNews">Описание Новости</label>
-        <input v-model="title" type="text" id="titleNews" />
-      </div>
-      <div class="form-group">
-        <label for="deskNews">Текст Новости</label>
-        <textarea v-model="desk" id="deskNews"></textarea>
-      </div>
-      <button type="submit">Отправить</button>
-    </form>
-  </div>
-</template>
+<style scoped>
+.news-form {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+</style>
