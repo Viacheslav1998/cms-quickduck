@@ -12,37 +12,48 @@ export default defineComponent({
     const title = ref('');
     const desk = ref('');
 
-    const submitForm = async () => {
-      try {
-        const formData = {
-          name: name.value,
-          title: title.value,
-          desk: desk.value
-        };
+    const responseMessage = ref('');
+    const responseStatus = ref('');
 
-        const response = await fetch('http://quickduck/news', { 
+    const submitForm = async () => {
+      const formData = new FormData();
+      formData.append('name', name.value);
+      formData.append('title', title.value);
+      formData.append('desk', desk.value);
+
+      try {
+        const response = await fetch('http://quickduck.com/api/news', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
+          body: formData
         });
 
         const data = await response.json();
-        if (response.ok) {
-          console.log('Новость добавлена:', data);
+
+        if(data.status === 'success') {
+          responseMessage.value = data.message;
+          responseStatus.value = 'alert-success';
         } else {
-          console.error('Ошибка:', data);
+          responseMessage.value = data.message;
+          responseStatus.value = 'alert-danger';
         }
+
+        // clear form 
+        name.value = '';
+        title.value = '';
+        desk.value = '';
+
       } catch (error) {
-        console.error('Ошибка при отправке:', error);
+        responseMessage.value = 'Ошибка при отправке данных.';
+        responseStatus.value ='alert-danger';
       }
     };
 
     return {
       name,
       title,
-     
+      desk,
+      responseMessage,
+      responseStatus,
       submitForm
     };
   }
@@ -54,33 +65,32 @@ export default defineComponent({
     <div class="name-page">
       <h2>Добавить Новость</h2>
     </div>
+    <div v-if="responseMessage" class="alert" :class="responseStatus">
+      {{ responseMessage }}
+    </div>
     <div class="custom-space">
       <form @submit.prevent="submitForm">
         <div class="form-group">
-          <label for="nameNews">Названия Новости</label>
-          <input v-model="name" type="name" class="form-control" id="nameNews" aria-describedby="nameNews">
-          <small id="nameHelp" class="form-text text-muted">то что привлечет внимание</small>
+          <label for="name">Названия Новости</label>
+          <input v-model="name" type="name" class="form-control" id="name" aria-describedby="name">
+          <small id="name" class="form-text text-muted">то что привлечет внимание</small>
         </div>
         <div class="form-group">
           <label for="title">Описание Новости</label>
           <input v-model="title" type="title" class="form-control" id="title">
-          <small id="nameHelp" class="form-text text-muted">Описание должно быть не большим - достаточно 255 символов - коротко о главном</small>
+          <small id="title" class="form-text text-muted">Описание должно быть не большим - достаточно 255 символов - коротко о главном</small>
         </div>
-        
         <div>
           <editor
-           
+            v-model="desk"
             api-key="0dlmagrtkkct366u3iv3bopx8ha1foy0mqtudu6p0tb6p0wr"
             :init="{
               toolbar_mode: 'sliding',
               plugins: [
                 // Core editing features
-                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-                // Your account includes a free trial of TinyMCE premium features
-                // Try the most popular premium features until Oct 19, 2024:
-                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+                'anchor', 'code', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
               ],
-              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+              toolbar: 'code | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
               tinycomments_mode: 'embedded',
               tinycomments_author: 'Author name',
               mergetags_list: [
@@ -92,6 +102,7 @@ export default defineComponent({
             initial-value="Давай пиши !"
           />
         </div>
+
         <div class="space"></div>
         <button type="submit" class="btn btn-danger">Создать</button>
       </form>
