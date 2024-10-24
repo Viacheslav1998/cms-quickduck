@@ -15,9 +15,6 @@ export default defineComponent({
         }
         
         const data = await response.json()
-        
-        console.log(typeof data)
-        
         return data;
 
         
@@ -54,7 +51,7 @@ export default defineComponent({
             <div class="content-news d-flex flex-column">
               <h3>{{ item.name }}</h3>
               <i>номер поста: {{ item.id }}</i>
-              <code><div v-html="item.desk"></div></code>
+              <p>{{ item.title }}</p>
             </div>
           </div>
 

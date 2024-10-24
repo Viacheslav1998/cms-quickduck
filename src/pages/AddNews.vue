@@ -16,6 +16,14 @@ export default defineComponent({
     const responseStatus = ref('');
 
     const submitForm = async () => {
+
+     // validation
+     if(!name.value || !title.value || !desk.value) {
+      responseMessage.value = 'Все поля обязательны для заполнения';
+      responseStatus.value = 'alert-danger';
+      return;
+     }
+
       const formData = new FormData();
       formData.append('name', name.value);
       formData.append('title', title.value);
@@ -64,17 +72,19 @@ export default defineComponent({
   <div class="container">
     <div class="name-page">
       <h2>Добавить Новость</h2>
-    </div>
+    </div><br>
     <div v-if="responseMessage" class="alert" :class="responseStatus">
       {{ responseMessage }}
     </div>
     <div class="custom-space">
       <form @submit.prevent="submitForm">
+
         <div class="form-group">
           <label for="name">Названия Новости</label>
           <input v-model="name" type="name" class="form-control" id="name" aria-describedby="name">
           <small id="name" class="form-text text-muted">то что привлечет внимание</small>
         </div>
+
         <div class="form-group">
           <label for="title">Описание Новости</label>
           <input v-model="title" type="title" class="form-control" id="title">
