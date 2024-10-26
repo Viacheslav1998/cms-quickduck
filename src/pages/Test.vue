@@ -1,73 +1,41 @@
 <template>
   <div class="news-form">
-    <h2>Добавить новость</h2>
-
-    <div v-if="responseMessage" class="alert" :class="responseStatus">{{ responseMessage }}</div>
-
-    <form @submit.prevent="submitForm">
-      <div class="mb-3">
-        <label for="name" class="form-label">Название</label>
-        <input type="text" v-model="name" id="name" class="form-control" required />
-      </div>
-
-      <div class="mb-3">
-        <label for="title" class="form-label">Заголовок</label>
-        <input type="text" v-model="title" id="title" class="form-control" required />
-      </div>
-
-      <div class="mb-3">
-        <label for="desk" class="form-label">Содержимое</label>
-        <textarea v-model="desk" id="desk" class="form-control" required></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Отправить</button>
-    </form>
+    <h2>тестирование приложений...</h2>
+  </div>
+  <hr>
+  <div style="color: white; text-align: center;">
+    {{ message }} <br>
+    {{ YourName  }} <br>
+    {{ age }}
+  </div>
+  <br>
+  <button @click="stateNamePerson">Сделай это немедленно</button>
+  <br>
+  <div style="padding: 20px; background-color: blanchedalmond; width: 50%; margin: 0 auto;" >
+    <p class="close" style="float: right;  border-radius: 10px; padding: 2px 8px 4px 8px;">X</p>
+    <div  
+    class="alert alert-danger"
+    style="width: 60%; padding: 20px; margin: 10px auto;">
+      и тут еще один момент говорят тут еще ничего нет
+    </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-
-const name = ref('');
-const title = ref('');
-const desk = ref('');
-
-const responseMessage = ref('');
-const responseStatus = ref('');
-
-const submitForm = async () => {
-  const formData = new FormData();
-  formData.append('name', name.value);
-  formData.append('title', title.value);
-  formData.append('desk', desk.value);
-
-  try {
-    const response = await fetch('http://quickduck.com/api/news', {
-      method: 'POST',
-      body: formData
-    });
-
-    const data = await response.json();
-
-    // Проверяем статус ответа и выводим сообщение
-    if (data.status === 'success') {
-      responseMessage.value = data.message;
-      responseStatus.value = 'alert-success';
-    } else {
-      responseMessage.value = data.message;
-      responseStatus.value = 'alert-danger';
-    }
-
-    // Очистка формы после успешной отправки
-    name.value = '';
-    title.value = '';
-    desk.value = '';
-
-  } catch (error) {
-    responseMessage.value = 'Ошибка при отправке данных.';
-    responseStatus.value = 'alert-danger';
+<script>
+export default {
+  data() {
+    return {
+      message: 'ты можешь больше чем думаешь!',
+      YourName: 'А как тебя зовут ?',
+      age: 'Возраст всего лишь цифры'
+    };
+  },
+  methods: {
+    stateNamePerson() {
+      this.message = 'мотивационное сообщение изменено'
+    }, 
   }
-};
+}
 </script>
 
 <style scoped>
@@ -82,4 +50,11 @@ const submitForm = async () => {
 .alert {
   margin-bottom: 20px;
 }
+.close {
+  cursor: pointer;
+  transition: all ease 0.2s;
+  border: 1px solid silver;
+}
+.close:hover {  color: orangered; border:1px solid red;}
+
 </style>
