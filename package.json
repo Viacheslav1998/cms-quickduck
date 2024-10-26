@@ -15,9 +15,11 @@
     "bootstrap": "^4.6.0",
     "highlight.js": "^11.10.0",
     "quill": "^2.0.2",
+    "sweetalert2": "^11.14.4",
     "trix": "^2.1.5",
     "vue": "^3.4.37",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vue-sweetalert2": "^5.0.11"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
