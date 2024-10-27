@@ -39,11 +39,12 @@ export default {
       this.progress = 0
       this.interval = setInterval(() => {
         if (this.progress < 100) {
-          this.progress += 1;
+          this.progress += 0.2;
         } else {
           clearInterval(this.interval)
+          alert('загрузка завершена')
         }
-      }, 400)
+      }, 100)
     },
     runProgress() {
       setTimeout(() => {
@@ -100,11 +101,11 @@ export default {
 <style>
 .progress-bar {
   margin: 20px 1px;
-  background-color: wheat;
-  height: 4px;
+  background-color: rgb(231, 167, 50)!important;
+  height: 2px;
   border-radius: 5px;
   width: 0;
-  transition: width 0.2s ease;
+  transition: width 1s ease;
 }
 .frm {
   background-color: black;
