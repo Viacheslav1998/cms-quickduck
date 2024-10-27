@@ -12,7 +12,7 @@ import './assets/custom.css';
 const app = createApp(App);
 
 app.use(router);
-app.use(VueSweetalert2); // Регистрация Sweetalert2
-app.component('VueDatePicker', VueDatePicker); // Регистрация DatePicker
+app.use(VueSweetalert2); 
+app.component('VueDatePicker', VueDatePicker); 
 
 app.mount('#app');
