@@ -3,7 +3,35 @@ export default {
   data() {
     return {
       show: true,
+      attention: 'это сообщение будет выведено',
+      message: ''
     }
+  },
+  methods: {
+    test() {
+      console.log('123')
+    },
+    base() {
+      setTimeout(() => {
+        this.attention = 'текст изменен'
+        this.message = 'сообщение было сгенерировано'
+      }, 1000);
+    },
+    showMessage() {
+      setTimeout(function() {
+        this.test()
+      }.bind(this), 1000)
+    },
+    runAttention() {
+      setTimeout(() => {
+        this.show = false;
+      }, 1200);
+    }
+  }, 
+  mounted() {
+    this.base()
+    this.showMessage()
+    this.runAttention();
   }
 }
 </script>
@@ -16,6 +44,13 @@ export default {
 <transition name="slide-fade">
   <p v-if="show" style="color: white;">Привет</p>
 </transition>
+<br>
+<div class="spptxt" style="color: olivedrab;">
+  <p>{{ attention }}</p>
+  <p>{{ message }}</p>
+</div>
+
+
 
 </template>
 
