@@ -5,7 +5,9 @@ export default {
       show: true,
       showScd: '',
       attention: 'это сообщение будет выведено',
-      message: ''
+      message: '',
+      progress: 0,
+      interval: null,
     }
   },
   methods: {
@@ -16,7 +18,7 @@ export default {
       setTimeout(() => {
         this.attention = 'текст изменен'
         this.message = 'сообщение было сгенерировано'
-      }, 1000);
+      }, 1000)
     },
     showMessage() {
       setTimeout(function() {
@@ -25,13 +27,28 @@ export default {
     },
     runAttention() {
       setTimeout(() => {
-        this.show = false;
-      }, 1200);
+        this.show = false
+      }, 1200)
     },
     showBlockAttention() {
       setTimeout(() => {
-        this.showScd = true;
-      }, 2000);
+        this.showScd = true
+      }, 2000)
+    },
+    startLoading() {
+      this.progress = 0
+      this.interval = setInterval(() => {
+        if (this.progress < 100) {
+          this.progress += 1;
+        } else {
+          clearInterval(this.interval)
+        }
+      }, 400)
+    },
+    runProgress() {
+      setTimeout(() => {
+        this.startLoading()
+      }, 1400)
     }
   }, 
   mounted() {
@@ -40,6 +57,7 @@ export default {
     this.runAttention()
     this.showBlockAttention()
     this.showScd = false
+    this.runProgress();
   }
 }
 </script>
@@ -51,6 +69,8 @@ export default {
     class="box-frame"
     v-if="showScd"
   >
+
+    <div class="progress-bar" :style="{ width: progress + '%' }"></div>
     <button 
       @click="show = !show"
       class="frm"
@@ -67,7 +87,6 @@ export default {
   </div>
 </transition>
 
-
 <br>
 <div class="spaceTestMessage">
   <div class="spptxt" style="color: white;">
@@ -76,11 +95,17 @@ export default {
   </div>
 </div>
 
-
-
 </template>
 
 <style>
+.progress-bar {
+  margin: 20px 1px;
+  background-color: wheat;
+  height: 4px;
+  border-radius: 5px;
+  width: 0;
+  transition: width 0.2s ease;
+}
 .frm {
   background-color: black;
   color: red;
