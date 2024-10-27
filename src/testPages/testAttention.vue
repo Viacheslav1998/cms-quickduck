@@ -3,6 +3,7 @@ export default {
   data() {
     return {
       show: true,
+      showScd: false,
       attention: 'это сообщение будет выведено',
       message: ''
     }
@@ -26,24 +27,46 @@ export default {
       setTimeout(() => {
         this.show = false;
       }, 1200);
+    },
+    showBlockAttention() {
+      setTimeout(() => {
+        this.showScd = true;
+      }, 2000);
     }
   }, 
   mounted() {
     this.base()
     this.showMessage()
-    this.runAttention();
+    this.runAttention()
+    this.showBlockAttention()
   }
 }
 </script>
 
 <template>
 
-<button @click="show = !show">
-  отобразить данные или скрыть их
-</button>
 <transition name="slide-fade">
-  <p v-if="show" style="color: white;">Привет</p>
+  <div 
+    class="box-frame"
+    v-if="showScd"
+  >
+    <button 
+      @click="show = !show"
+      class="frm"
+    >
+      отобразить данные или скрыть их
+    </button>
+    <transition name="slide-fade">
+      <p 
+        v-if="show"
+        style="color: white;"
+        class="ph"
+      >Привет</p>
+    </transition>
+  </div>
 </transition>
+
+
 <br>
 <div class="spptxt" style="color: olivedrab;">
   <p>{{ attention }}</p>
@@ -55,6 +78,38 @@ export default {
 </template>
 
 <style>
+.frm {
+  background-color: black;
+  color: red;
+  outline: none;
+  border: none; 
+  transition: all 0.5s ease;
+  border-radius: 20px;
+  padding: 10px;
+}
+.frm:hover {
+  background-color: rgb(40, 40, 40);
+}
+.ph {
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  position: relative;
+  width: 20%;
+  background-color: blueviolet;
+}
+.box-frame {
+  position: relative;
+  top: 1px;
+  background-color: brown;
+  padding: 10px;
+  margin: 20px auto;
+  width: 400px;
+  height: 400px;
+  border-radius: 18px;
+}
+
+
 .slide-fade-enter-active {
   transition: all 1s ease-out;
 }
