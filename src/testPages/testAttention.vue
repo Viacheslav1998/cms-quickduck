@@ -3,14 +3,14 @@ export default {
   data() {
     return {
       show: true,
-      showScd: false,
+      showScd: '',
       attention: 'это сообщение будет выведено',
       message: ''
     }
   },
   methods: {
     test() {
-      console.log('123')
+      console.log('test123testmessage')
     },
     base() {
       setTimeout(() => {
@@ -39,6 +39,7 @@ export default {
     this.showMessage()
     this.runAttention()
     this.showBlockAttention()
+    this.showScd = false
   }
 }
 </script>
@@ -68,9 +69,11 @@ export default {
 
 
 <br>
-<div class="spptxt" style="color: olivedrab;">
-  <p>{{ attention }}</p>
-  <p>{{ message }}</p>
+<div class="spaceTestMessage">
+  <div class="spptxt" style="color: white;">
+    <p>{{ attention }}</p>
+    <p>{{ message }}</p>
+  </div>
 </div>
 
 
@@ -104,11 +107,18 @@ export default {
   background-color: brown;
   padding: 10px;
   margin: 20px auto;
-  width: 400px;
+  max-width: 1100px;
   height: 400px;
   border-radius: 18px;
 }
 
+.spaceTestMessage {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 18px;
+  background-color: blueviolet;
+}
 
 .slide-fade-enter-active {
   transition: all 1s ease-out;
