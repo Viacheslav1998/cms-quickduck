@@ -1,6 +1,7 @@
 <script>
 import { defineComponent, ref } from 'vue';
 import Editor from '@tinymce/tinymce-vue';
+import Swal from 'sweetalert2';
 
 export default defineComponent({
   name: 'AddNews',
@@ -38,11 +39,19 @@ export default defineComponent({
         const data = await response.json();
 
         if(data.status === 'success') {
-          responseMessage.value = data.message;
-          responseStatus.value = 'alert-success';
+            Swal.fire({
+              title: 'Создано !',
+              text: data.message,
+              icon: 'success',
+              confirmButtonText: 'Закрыть'
+            })
         } else {
-          responseMessage.value = data.message;
-          responseStatus.value = 'alert-danger';
+          Swal.fire({
+              title: 'Ошибка, что то пошло не так!',
+              text: data.message,
+              icon: 'error',
+              confirmButtonText: 'Закрыть'
+            })
         }
 
         // clear form 
@@ -72,22 +81,19 @@ export default defineComponent({
   <div class="container">
     <div class="name-page">
       <h2>Добавить Новость</h2>
-    </div><br>
-    <div v-if="responseMessage" class="alert" :class="responseStatus">
-      {{ responseMessage }}
     </div>
     <div class="custom-space">
       <form @submit.prevent="submitForm">
 
         <div class="form-group">
           <label for="name">Названия Новости</label>
-          <input v-model="name" type="name" class="form-control" id="name" aria-describedby="name">
+          <input v-model="name" type="name" class="form-control" id="name" aria-describedby="name" required>
           <small id="name" class="form-text text-muted">то что привлечет внимание</small>
         </div>
 
         <div class="form-group">
           <label for="title">Описание Новости</label>
-          <input v-model="title" type="title" class="form-control" id="title">
+          <input v-model="title" type="title" class="form-control" id="title" required>
           <small id="title" class="form-text text-muted">Описание должно быть не большим - достаточно 255 символов - коротко о главном</small>
         </div>
         <div>

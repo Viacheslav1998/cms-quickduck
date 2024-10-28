@@ -42,7 +42,7 @@ export default {
           this.progress += 0.2;
         } else {
           clearInterval(this.interval)
-          alert('загрузка завершена')
+          alert('загрузка завершена') 
         }
       }, 100)
     },
