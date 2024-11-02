@@ -12,9 +12,14 @@ export default defineComponent({
     const name = ref('');
     const title = ref('');
     const desk = ref('');
+    const img = ref(null);
 
     const responseMessage = ref('');
     const responseStatus = ref('');
+
+    const onFileChange = (event) => {
+      img.value = event.target.files[0];
+    };
 
     const submitForm = async () => {
 
@@ -29,6 +34,10 @@ export default defineComponent({
       formData.append('name', name.value);
       formData.append('title', title.value);
       formData.append('desk', desk.value);
+      formData.append('img', img.value);
+
+
+      console.log(formData);
 
       try {
         const response = await fetch('http://quickduck.com/api/news', {
@@ -58,6 +67,7 @@ export default defineComponent({
         name.value = '';
         title.value = '';
         desk.value = '';
+        img.value = '';
 
       } catch (error) {
         responseMessage.value = 'Ошибка при отправке данных.';
@@ -71,6 +81,7 @@ export default defineComponent({
       desk,
       responseMessage,
       responseStatus,
+      onFileChange,
       submitForm
     };
   }
@@ -89,6 +100,12 @@ export default defineComponent({
           <label for="name">Названия Новости</label>
           <input v-model="name" type="name" class="form-control" id="name" aria-describedby="name" required>
           <small id="name" class="form-text text-muted">то что привлечет внимание</small>
+        </div>  
+
+        <div class="form-group">
+          <label for="img">Картинку загрузить</label>
+          <input type="file" class="form-control" id="img" aria-describedby="img" @change="onFileChange">
+          <small id="img" class="form-text text-muted">Главное изображение</small>
         </div>
 
         <div class="form-group">
