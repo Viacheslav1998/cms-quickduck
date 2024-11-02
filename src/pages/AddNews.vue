@@ -12,13 +12,13 @@ export default defineComponent({
     const name = ref('');
     const title = ref('');
     const desk = ref('');
-    const img = ref(null);
+    const path_to_image = ref(null);
 
     const responseMessage = ref('');
     const responseStatus = ref('');
 
     const onFileChange = (event) => {
-      img.value = event.target.files[0];
+      path_to_image.value = event.target.files[0];
     };
 
     const submitForm = async () => {
@@ -34,7 +34,7 @@ export default defineComponent({
       formData.append('name', name.value);
       formData.append('title', title.value);
       formData.append('desk', desk.value);
-      formData.append('img', img.value);
+      formData.append('path_to_image', path_to_image.value);
 
 
       console.log(formData);
@@ -67,11 +67,11 @@ export default defineComponent({
         name.value = '';
         title.value = '';
         desk.value = '';
-        img.value = '';
+        path_to_image.value = '';
 
       } catch (error) {
         responseMessage.value = 'Ошибка при отправке данных.';
-        responseStatus.value ='alert-danger';
+        responseStatus.value = 'alert-danger';
       }
     };
 
@@ -103,9 +103,9 @@ export default defineComponent({
         </div>  
 
         <div class="form-group">
-          <label for="img">Картинку загрузить</label>
-          <input type="file" class="form-control" id="img" aria-describedby="img" @change="onFileChange">
-          <small id="img" class="form-text text-muted">Главное изображение</small>
+          <label for="path_to_image">Картинку загрузить</label>
+          <input type="file" class="form-control" id="path_to_image" aria-describedby="path_to_image" @change="onFileChange">
+          <small id="path_to_image" class="form-text text-muted">Главное изображение</small>
         </div>
 
         <div class="form-group">
