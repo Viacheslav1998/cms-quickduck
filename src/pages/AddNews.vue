@@ -23,21 +23,48 @@ export default defineComponent({
 
     const submitForm = async () => {
 
-     // validation
-     if(!name.value || !title.value || !desk.value) {
-      responseMessage.value = 'Все поля обязательны для заполнения';
-      responseStatus.value = 'alert-danger';
-      return;
-     }
+      // validation
+      if(!name.value || !title.value || !desk.value) {
+        responseMessage.value = 'Все поля обязательны для заполнения';
+        responseStatus.value = 'alert-danger';
+        return;
+      }
+
+      let imageUrl = '';
+      if(path_to_image.value) {
+        const imageFormData = new FormData();
+        imageFormData.append('path_to_image', path_to_image.value)
+        
+        try {
+          const uploadResponse = await fetch('http://quickduck.com/api/upload-image', {
+            method: 'POST',
+            body: imageFormData
+          });
+
+          const uploadData = await uploadResponse.json();
+          if (uploadData.status === 'success') {
+            imageUrl = uploadData.url;
+          } else {
+            Swal.fire({
+              title: 'Ошибка загрузки изображения',
+              text: uploadData.message,
+              icon: 'error',
+              configmButtonText: 'Закрыть',
+            });
+            return;
+          }
+        } catch (error) {
+          responseMessage.value = 'Ошибка при загрузке изображения.';
+          responseStatus.value = 'alert-danger';
+          return;
+        }
+      }
 
       const formData = new FormData();
       formData.append('name', name.value);
       formData.append('title', title.value);
       formData.append('desk', desk.value);
-      formData.append('path_to_image', path_to_image.value);
-
-
-      console.log(formData);
+      formData.append('path_to_image', imageUrl);
 
       try {
         const response = await fetch('http://quickduck.com/api/news', {
@@ -67,7 +94,7 @@ export default defineComponent({
         name.value = '';
         title.value = '';
         desk.value = '';
-        path_to_image.value = '';
+        path_to_image.value = 'null';
 
       } catch (error) {
         responseMessage.value = 'Ошибка при отправке данных.';
@@ -79,6 +106,7 @@ export default defineComponent({
       name,
       title,
       desk,
+      path_to_image,
       responseMessage,
       responseStatus,
       onFileChange,
@@ -104,7 +132,7 @@ export default defineComponent({
 
         <div class="form-group">
           <label for="path_to_image">Картинку загрузить</label>
-          <input type="file" class="form-control" id="path_to_image" aria-describedby="path_to_image" @change="onFileChange">
+          <input type="file" name="path_to_image" class="form-control" id="path_to_image" aria-describedby="path_to_image" @change="onFileChange">
           <small id="path_to_image" class="form-text text-muted">Главное изображение</small>
         </div>
 
