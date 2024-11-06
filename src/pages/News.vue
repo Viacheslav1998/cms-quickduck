@@ -17,11 +17,13 @@ export default defineComponent({
         const data = await response.json()
         return data;
 
-        
       } catch (error) {
         console.error('Ошибка: ', error.message)
       }
     }
+
+   const deletePost = async()
+
 
     onMounted(async () => {
       news.value = await getData()

@@ -127,7 +127,7 @@ export default defineComponent({
         <div class="form-group">
           <label for="name">Названия Новости</label>
           <input v-model="name" type="name" class="form-control" id="name" aria-describedby="name" required>
-          <small id="name" class="form-text text-muted">то что привлечет внимание</small>
+          <small id="name" class="form-text text-muted">То что привлечет внимание</small>
         </div>  
 
         <div class="form-group">
