@@ -34,7 +34,8 @@ export default defineComponent({
         }
 
         const data = await response.json();
-        
+        console.log('Ответ от сервера:', data);
+
         if(data.status === 'success') {
           Swal.fire({
             title: 'Удалено!',
