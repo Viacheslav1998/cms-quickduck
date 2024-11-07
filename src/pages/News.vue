@@ -22,15 +22,47 @@ export default defineComponent({
       }
     }
 
-   const deletePost = async()
+    const test = () => {
+      var base = 'info static test to work'
+    }
 
+    const deletePost = async(postId) => {
+
+      console.log('123123123123');
+      try {
+        const response = await fetch(`http://quickduck.com/api/news/${postId}`,{
+          method: 'DELETE',
+        });
+
+        const data = await response.json();
+
+        if(data.status === 'success') {
+          Swal.fire({
+            title: 'Удалено!',
+            text: data.message,
+            icon: 'success',
+            configrmButtonText: 'Закрыть',
+          });
+        } else {
+          Swal.fire({
+            title: 'Ошибка',
+            text: data.message,
+            icon: 'error',
+            configrmButtonText: 'Закрыть',
+          });
+        }
+      } catch (error) {
+        console.error('Ошибка при удалении: ', error);
+      }
+    };
 
     onMounted(async () => {
       news.value = await getData()
-    })
+    });
 
     return {
-      news
+      news,
+      test
     };
   }
 });
@@ -60,11 +92,17 @@ export default defineComponent({
             </div>
           </div>
 
-          <div class="d-flex flex-row" style="background-color: #245577;">
+          <div class="d-flex flex-row" style="background-color: rgb(57, 63, 74);">
             <div class="move d-flex flex-column justify-content-center">
               <div><a href="#" class="link">перейти...</a></div>
               <div><a href="#" class="edt">Редактировать</a></div>
-              <div><a href="#" class="danger">Удалить</a></div>
+              <div>
+                <button
+                  class="danger"
+                  @click="test"
+                >Удалить</button>
+              </div>
+             
             </div>
           </div>
         </div>
@@ -110,8 +148,13 @@ export default defineComponent({
 .move {
   padding: 0 20px;}
 /* links */
-.danger {color: #EB4C42;}
-.danger:hover {color:red;}
+.danger {
+  color: #d65249;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+}
+.danger:hover {color:red; }
 .edt {color: #E6BF0B;}
 .edt:hover { color: #F07427;}
 .link { color: silver;}
