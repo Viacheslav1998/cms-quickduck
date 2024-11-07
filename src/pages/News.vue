@@ -1,5 +1,6 @@
 <script>
 import { defineComponent, ref, onMounted } from 'vue';
+import Swal from 'sweetalert2';
 
 export default defineComponent({
   name: 'News',
@@ -22,37 +23,41 @@ export default defineComponent({
       }
     }
 
-    const test = () => {
-      var base = 'info static test to work'
-    }
-
     const deletePost = async(postId) => {
-
-      console.log('123123123123');
       try {
         const response = await fetch(`http://quickduck.com/api/news/${postId}`,{
           method: 'DELETE',
         });
 
-        const data = await response.json();
+        if(!response.ok) {
+          throw new Error('Не удалось удалить новость');
+        }
 
+        const data = await response.json();
+        
         if(data.status === 'success') {
           Swal.fire({
             title: 'Удалено!',
             text: data.message,
             icon: 'success',
-            configrmButtonText: 'Закрыть',
+            confirmButtonText: 'Закрыть',
           });
         } else {
           Swal.fire({
             title: 'Ошибка',
             text: data.message,
             icon: 'error',
-            configrmButtonText: 'Закрыть',
+            confirmButtonText: 'Закрыть',
           });
         }
       } catch (error) {
-        console.error('Ошибка при удалении: ', error);
+        console.error('ошибка при удалении: ', error);
+        Swal.fire({
+          title: 'Ошибка',
+          text: error.message || 'что то пошло не так.',
+          icon: 'error',
+          confirmButtonText: 'Закрыть',
+        });
       }
     };
 
@@ -62,7 +67,7 @@ export default defineComponent({
 
     return {
       news,
-      test
+      deletePost
     };
   }
 });
@@ -99,7 +104,7 @@ export default defineComponent({
               <div>
                 <button
                   class="danger"
-                  @click="test"
+                  @click="deletePost(`${item.id}`)"
                 >Удалить</button>
               </div>
              
