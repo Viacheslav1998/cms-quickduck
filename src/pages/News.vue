@@ -175,7 +175,7 @@ export default defineComponent({
 .m-top {margin-top: 20px;}
 /* translate */
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: all 0.5s;
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
