@@ -7,6 +7,7 @@ export default defineComponent({
   setup() {
     const news = ref([])
 
+    // get All news
     async function getData() {
       const url = 'http://quickduck.com/api/news'
       try {
@@ -23,7 +24,8 @@ export default defineComponent({
       }
     }
 
-    const deletePost = async(postId) => {
+    // delete news = id
+    const deleteNews = async(postId) => {
       try {
         const response = await fetch(`http://quickduck.com/api/news/${postId}`,{
           method: 'DELETE',
@@ -70,7 +72,7 @@ export default defineComponent({
 
     return {
       news,
-      deletePost
+      deleteNews
     };
   }
 });
@@ -109,7 +111,7 @@ export default defineComponent({
               <div>
                 <button
                   class="danger"
-                  @click="deletePost(`${item.id}`)"
+                  @click="deleteNews(`${item.id}`)"
                 >Удалить</button>
               </div>
              
