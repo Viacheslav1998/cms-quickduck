@@ -87,44 +87,46 @@ export default defineComponent({
 
     <h2>попробуй добавить плавность удаление (врем. метка)</h2>
 
-    <div class="custom-space" v-if="Object.keys(news).length !== 0">
-      <div class="news-box" v-for="item in news" :key="item.id">
-        <div class="news d-flex flex-row justify-content-start">
-          <div class="imagen">
-            <img 
-              :src="item.path_to_image ? item.path_to_image : '/images/palm.jpg'"
-              alt="icons"
-            >
-          </div>
-          <div class="d-flex flex-column justify-content-start" style="width: 80%;">
-            <div class="content-news d-flex flex-column">
-              <h3>{{ item.name }}</h3>
-              <i>номер поста: {{ item.id }}</i>
-              <p>{{ item.title }}</p>
-            </div>
-          </div>
-
-          <div class="d-flex flex-row" style="background-color: rgb(57, 63, 74);">
-            <div class="move d-flex flex-column justify-content-center">
-              <div><a href="#" class="link">перейти...</a></div>
-              <div><a href="#" class="edt">Редактировать</a></div>
-              <div>
-                <button
-                  class="danger"
-                  @click="deleteNews(`${item.id}`)"
-                >Удалить</button>
+      <div class="custom-space" v-if="Object.keys(news).length !== 0">
+        <transition-group name="fade" tag="div">
+          <div class="news-box" v-for="item in news" :key="item.id">
+            <div class="news d-flex flex-row justify-content-start">
+              <div class="imagen">
+                <img 
+                  :src="item.path_to_image ? item.path_to_image : '/images/palm.jpg'"
+                  alt="icons"
+                >
               </div>
-             
+
+              <div class="d-flex flex-column justify-content-start" style="width: 80%;">
+                <div class="content-news d-flex flex-column">
+                  <h3>{{ item.name }}</h3>
+                  <i>номер поста: {{ item.id }}</i>
+                  <p>{{ item.title }}</p>
+                </div>
+              </div>
+
+              <div class="d-flex flex-row" style="background-color: rgb(57, 63, 74);">
+                <div class="move d-flex flex-column justify-content-center">
+                  <div><a href="#" class="link">перейти...</a></div>
+                  <div><a href="#" class="edt">Редактировать</a></div>
+                  <div>
+                    <button
+                      class="danger"
+                      @click="deleteNews(`${item.id}`)"
+                    >Удалить</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </transition-group>
+      </div>
+
+      <div class="alert alert-danger m-top"  v-else>
+          Данных не найдено
       </div>
     </div>
-    
-    <div class="alert alert-danger m-top"  v-else>
-        Данных не найдено
-    </div>
-  </div>
 </template>
 
 <style scoped>
@@ -173,4 +175,12 @@ export default defineComponent({
 .link:hover { color: white;}
 /* end linkg */
 .m-top {margin-top: 20px;}
+/* translate */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* или .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
+/*end-translate */
 </style>
