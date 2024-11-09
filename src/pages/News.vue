@@ -41,8 +41,6 @@ export default defineComponent({
 
           news.value = news.value.filter(item => item.id !== postId);
 
-          news.value = await getData();
-
           Swal.fire({
             title: 'Удалено!',
             text: data.message,
@@ -86,8 +84,6 @@ export default defineComponent({
     <div class="name-page">
       <h2>Управление новостями</h2>
     </div>
-
-    <h2>попробуй добавить плавность удаление (врем. метка)</h2>
 
     <div class="custom-space" v-if="Object.keys(news).length !== 0">
       <transition-group name="fade" tag="div">
