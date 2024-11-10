@@ -30,17 +30,12 @@ export default defineComponent({
         const response = await fetch(`http://quickduck.com/api/news/${postId}`,{
           method: 'DELETE',
         });
-
         if(!response.ok) {
           throw new Error('Не удалось удалить новость');
         }
-
         const data = await response.json();
-       
         if(data.status === 'success') {
-
           news.value = news.value.filter(item => item.id !== postId);
-
           Swal.fire({
             title: 'Удалено!',
             text: data.message,
