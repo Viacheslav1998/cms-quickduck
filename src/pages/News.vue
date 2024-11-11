@@ -2,12 +2,14 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import Swal from 'sweetalert2';
 import EditPopup from '../components/EditPopup.vue';
-import EditPopup from '../components/EditPopup.vue';
 
 export default defineComponent({
   name: 'News',
+  components: { EditPopup },
   setup() {
     const news = ref([])
+    const isPopupVisible = ref(false)
+    const selectedNews = ref(null)
 
     // get All news
     async function getData() {
@@ -24,7 +26,31 @@ export default defineComponent({
       } catch (error) {
         console.error('Ошибка: ', error.message)
       }
-    }
+    };
+
+    const openEditPopup = (item) => {
+      selectedNews.value = item;
+      isPopupVisible.value = true;
+    };
+
+    const updateNews = async (updatedItem) => {
+      try {
+        const response = await fetch(`http://quickduck.com/api/news/${updatedItem.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedItem),
+        });
+        // need add poppup/alert
+        if (!response.ok) throw new Error ('Ошибка при обновлении'); 
+
+        const index = news.value.findIndex((n) => n.id === updatedItem.id);
+        if (index !== -1) news.value[index] = updatedItem;
+
+        console.log('Новость обновлена');
+      } catch (error) {
+        console.error('Ошибка при обновлении: ', error);
+      }
+    };
 
     // delete news = id
     const deleteNews = async(postId) => {
@@ -69,9 +95,14 @@ export default defineComponent({
 
     return {
       news,
+      deleteNews,
+      isPopupVisible,
+      selectedNews,
+      openEditPopup,
+      updateNews,
       deleteNews
     };
-  }
+  },
 });
 
 </script>
