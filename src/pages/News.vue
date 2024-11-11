@@ -1,6 +1,8 @@
 <script>
 import { defineComponent, ref, onMounted } from 'vue';
 import Swal from 'sweetalert2';
+import EditPopup from '../components/EditPopup.vue';
+import EditPopup from '../components/EditPopup.vue';
 
 export default defineComponent({
   name: 'News',
@@ -119,6 +121,14 @@ export default defineComponent({
     <div class="alert alert-danger m-top"  v-else>
         Данных не найдено
     </div>
+
+    <EditPopup
+      :isVisible="isPopupVisible"
+      :newsItem="selectedNews"
+      @close="isPopupVisible = false"
+      @update="updateNews"
+    />
+    
   </div>
 </template>
 
