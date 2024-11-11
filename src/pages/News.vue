@@ -135,7 +135,14 @@ export default defineComponent({
             <div class="d-flex flex-row" style="background-color: rgb(57, 63, 74);">
               <div class="move d-flex flex-column justify-content-center">
                 <div><a href="#" class="link">перейти...</a></div>
-                <div><a href="#" class="edt">Редактировать</a></div>
+                <div>
+                  <button
+                    class="edt" 
+                    @click="openEditPopup(item)"
+                  >
+                    Редактировать
+                  </button>
+                </div>
                 <div>
                   <button
                     class="danger"
@@ -203,7 +210,12 @@ export default defineComponent({
   font-weight: bold;
 }
 .danger:hover {color:red; }
-.edt {color: #E6BF0B;}
+.edt {
+  color: #E6BF0B;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+}
 .edt:hover { color: #F07427;}
 .link { color: silver;}
 .link:hover { color: white;}
