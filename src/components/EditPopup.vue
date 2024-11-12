@@ -5,13 +5,13 @@
         <h3>Редактировать Новость</h3>
         <form @submit.prevent="submitForm">
           <label>Название: </label>
-          <input v-model="FormData.name" required />
+          <input v-model="formData.name" required />
 
           <label>Заголовок: </label>
-          <input v-model="FormData.title" required />
+          <input v-model="formData.title" required />
 
           <label>Путь к изображению: </label>
-          <input v-model="FormData.path_to_image" required />
+          <input type="file" name="path_to_image" class="form-control" id="path_to_image" aria-describedby="path_to_image" @change="onFileChange">
 
           <button type="submit">Сохранить</button>
           <button type="button" @click="close">Закрыть</button>
