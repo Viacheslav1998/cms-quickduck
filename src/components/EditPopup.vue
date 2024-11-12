@@ -13,6 +13,10 @@
           <label>Путь к изображению: </label>
           <input type="file" name="path_to_image" class="form-control" id="path_to_image" aria-describedby="path_to_image" @change="onFileChange">
 
+
+          <label>Обновить заполнение <span style="color: black; font-size: 12px;">(но помни тут возможность ограничена)</span></label>
+          <textarea v-model="formData.desk" name="desk"></textarea>
+
           <br>
           <button class="custom-b green-b" type="submit">Cохрани́ть</button>
           <button class="custom-b red-b" type="button" @click="close">Закры́ть</button>
