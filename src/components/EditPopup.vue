@@ -14,8 +14,8 @@
           <input type="file" name="path_to_image" class="form-control" id="path_to_image" aria-describedby="path_to_image" @change="onFileChange">
 
 
-          <label>Обновить заполнение <span style="color: black; font-size: 12px;">(но помни тут возможность ограничена)</span></label>
-          <textarea v-model="formData.desk" name="desk"></textarea>
+          <label>Обновить заполнение <span style="color: black; font-size: 12px;">(возможности ограничены)</span></label>
+          <textarea class="area-c" v-model="formData.desk" name="desk"></textarea>
 
           <br>
           <button class="custom-b green-b" type="submit">Cохрани́ть</button>
@@ -91,6 +91,15 @@ form input {
   border: 2px solid white;
   border-radius: 6px;
   padding: 4px;
+  margin-bottom: 10px;
+}
+
+.area-c {
+  color: rgb(255, 255, 255);
+  background-color: rgb(68, 68, 68);
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
   margin-bottom: 10px;
 }
 
