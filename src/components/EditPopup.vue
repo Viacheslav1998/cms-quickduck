@@ -10,17 +10,22 @@
           <label>Заголовок: </label>
           <input v-model="formData.title" required />
 
-          <label>Путь к изображению: </label>
-          <input type="file" name="path_to_image" class="form-control" id="path_to_image" aria-describedby="path_to_image" @change="onFileChange">
-
-
           <label>Обновить заполнение <span style="color: black; font-size: 12px;">(возможности ограничены)</span></label>
           <textarea class="area-c" v-model="formData.desk" name="desk"></textarea>
 
           <br>
           <button class="custom-b green-b" type="submit">Cохрани́ть</button>
-          <button class="custom-b red-b" type="button" @click="close">Закры́ть</button>
         </form>
+        <div style="border: 1px solid black; margin: 20px 0;"></div>
+        <b style="color: white;">Изменить картинку</b>
+        <form @submit.prevent="test">
+          <label>проверка для формы</label>
+          <input type="text" v-model="formImage.path_to_image">
+          <br>
+          <button class="custom-b green-b" type="submit">Cохрани́ть</button>
+        </form>
+        <div style="border: 1px solid black; margin: 20px 0;"></div>
+        <button class="custom-b red-b" type="button" @click="close">Закры́ть</button>
       </div>
     </div>
   </transition>
@@ -34,12 +39,17 @@ export default defineComponent({
     isVisible: Boolean, 
     newsItem: Object,
   },
-  emits: ['close', 'update'],
+
+  emits: ['close', 'update', 'testUpd'],
+
   setup(props, { emit }) {
     const formData = ref({
       name: '', 
       title: '',
-      path_to_image: ''
+    });
+
+    const formImage = ref({
+      path_to_image: '',
     });
 
     //upd data
@@ -59,10 +69,18 @@ export default defineComponent({
       close();
     };
 
+    // передай ...
+    const test = () => {
+      emit('testUpd')
+    }
+
+
     return {
       formData, 
       close, 
       submitForm,
+      test,
+      formImage
     };
   },
 });
@@ -71,6 +89,7 @@ export default defineComponent({
 
 <style scoped>
 .popup-overlay {
+  overflow-y: auto;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(84, 81, 92, 0.5);
@@ -109,7 +128,7 @@ form input {
   transition: all 0.2s ease;
 }
 .green-b {
-  background-color: rgb(66, 103, 5);
+  background-color: rgb(70, 80, 55);
   padding: 10px;
   border-radius: 10px;
   font-size: 18px;
