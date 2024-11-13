@@ -165,6 +165,7 @@ export default defineComponent({
       :newsItem="selectedNews"
       @close="isPopupVisible = false"
       @update="updateNews"
+      @testUpd="parendEventTest"
     />
     
   </div>

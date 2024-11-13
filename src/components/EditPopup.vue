@@ -18,7 +18,7 @@
         </form>
         <div style="border: 1px solid black; margin: 20px 0;"></div>
         <b style="color: white;">Изменить картинку</b>
-        <form @submit.prevent="test">
+        <form @submit.prevent="test2">
           <label>проверка для формы</label>
           <input type="text" v-model="formImage.path_to_image">
           <br>
@@ -69,9 +69,10 @@ export default defineComponent({
       close();
     };
 
-    // передай ...
-    const test = () => {
-      emit('testUpd')
+
+
+    const test2 = () => {
+      console.log('current event work')
     }
 
 
@@ -79,7 +80,7 @@ export default defineComponent({
       formData, 
       close, 
       submitForm,
-      test,
+      test2,
       formImage
     };
   },
