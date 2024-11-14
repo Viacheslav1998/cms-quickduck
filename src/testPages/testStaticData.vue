@@ -8,14 +8,24 @@
       <h3>функция получения данных</h3>
     </div>
   </div>
+  <div>
+    <TestSubmit 
+      @click="danger"
+    />
+  </div>
 </template>
 
 <script>
+import TestSubmit from './testChilds/TestSubmit.vue';
+
 export default {
   name: 'testStaticData',
-  setup() {
-    console.log('asd');
-  }
+  components: { TestSubmit },
+  methods: {
+    danger(data) {
+      console.log('входящее: ', data.message);
+    }
+  },
 }
 </script>
 
