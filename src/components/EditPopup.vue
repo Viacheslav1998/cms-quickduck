@@ -35,6 +35,7 @@
 import { defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({
+  name: 'EditPopup',
   props: {
     isVisible: Boolean, 
     newsItem: Object,
@@ -69,12 +70,9 @@ export default defineComponent({
       close();
     };
 
-
-
     const test2 = () => {
       console.log('current event work')
     }
-
 
     return {
       formData, 
