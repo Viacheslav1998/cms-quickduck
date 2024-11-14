@@ -10,7 +10,7 @@
   </div>
   <div>
     <TestSubmit 
-      @click="danger"
+      @click="sendDataToParent"
     />
   </div>
 </template>
@@ -22,8 +22,8 @@ export default {
   name: 'testStaticData',
   components: { TestSubmit },
   methods: {
-    danger(data) {
-      console.log('входящее: ', data.message);
+    sendDataToParent(data) {
+      console.log('входящее: ', data);
     }
   },
 }
