@@ -6,12 +6,13 @@
       <i>это всего лишь понмиание emits</i><br><br>
       <button type="button" class="btn btn-warning" @click="sendDataToParent">Warning</button>
     </div>
+    <div class="test-container">
+      <button type="button" class="btn btn-danger" @click="testAttention">Тестовая кнопка</button>
+    </div>
   </div>
 </template>
 
 <script>
-import data_1 from '/public/data/data_1.json';
-
 export default {
   name: 'TestSubmit',
   emits: ['click'],
@@ -31,6 +32,10 @@ export default {
 
     danger() {
       this.$emit('click', {message: 'привет ты получил этот текст'});
+    },
+
+    testAttention: () => {
+      console.log('это тестовая кнопка - которая выведет данные только того что находится в данном компоненте');
     }
   },
 }
