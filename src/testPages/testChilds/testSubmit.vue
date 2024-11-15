@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style spaces>
+<style scoped>
 .space {
   padding: 20px;
   background-color: blueviolet;
