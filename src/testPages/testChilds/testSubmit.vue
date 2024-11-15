@@ -1,11 +1,13 @@
 <template>
   <div class="container">
     <div class="space">
-      <h1>Конкретно этот блок дочерний</h1>
-      <p>Отсюда будут выводиться нужные данные</p>
-      <i>это всего лишь понмиание emits</i><br><br>
+      <h1>{{ title }}</h1>
+      <p>{{ description }}</p>
+      <i>{{ tiny }}</i>
+      <br><br>
       <button type="button" class="btn btn-warning" @click="sendDataToParent">Warning</button>
     </div>
+    <div style="padding: 10px 0;"></div>
     <div class="test-container">
       <button type="button" class="btn btn-danger" @click="testAttention">Тестовая кнопка</button>
     </div>
@@ -16,6 +18,13 @@
 export default {
   name: 'TestSubmit',
   emits: ['click'],
+  data() {
+    return {
+      title: 'Конкретно этот блок дочерний',
+      description: 'Отсюда будут выводится нужные данные',
+      tiny: 'это всего лишь для понимания Emits|Props|Data'
+    }
+  },
   methods: {
     async sendDataToParent() {
       try {
