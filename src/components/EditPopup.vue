@@ -18,12 +18,24 @@
         </form>
         <div style="border: 1px solid black; margin: 20px 0;"></div>
         <b style="color: white;">Изменить картинку</b>
+
         <form @submit.prevent="test2">
           <label>проверка для формы</label>
           <input type="text" v-model="formImage.path_to_image">
           <br>
           <button class="custom-b green-b" type="submit">Cохрани́ть</button>
         </form>
+        <div style="border: 1px solid black; margin: 20px 0;"></div>
+        <form @submit.prevent="uploadImages">
+          <label style="font-size: 16px;">обновить текущее изображение</label>
+          <input type="file" @change="handleFileUpload" required />
+          <button class="custom-b green-b" type="submit">Обновить картинку</button>
+        </form>
+        <p 
+          v-if="uploadStatus"
+        >
+          {{ uploadStatus }}
+        </p>
         <div style="border: 1px solid black; margin: 20px 0;"></div>
         <button class="custom-b red-b" type="button" @click="close">Закры́ть</button>
       </div>
@@ -44,6 +56,10 @@ export default defineComponent({
   emits: ['close', 'update', 'testUpd'],
 
   setup(props, { emit }) {
+
+    const imageFile = ref(null);
+    const uploadStatus = ref('');
+
     const formData = ref({
       name: '', 
       title: '',
@@ -63,7 +79,6 @@ export default defineComponent({
       },
       { immediate: true }
     );
-
     const close = () => emit('close');
     const submitForm = () => {
       emit('update', { ...formData.value, id: props.newsItem.id });
@@ -72,14 +87,45 @@ export default defineComponent({
 
     const test2 = () => {
       console.log('current event work')
-    }
+    };
+
+    const handleFileUpload = (event) => {
+      imageFile.value = event.target.files[0];
+    };
+
+    const uploadImage = async () => {
+      if (!imageFile.value) {
+        uploadStatus.value = 'а ты выбрал файл?';
+        return;
+      }
+
+      const formDataImage = new FormData();
+      formDataImage.append('image', imageFile.value);
+
+      try {
+        const response = await fetch(`http://quickduck.com/api/news/${id}/update-image`, {
+          method: 'POST',
+          body: formDataImage
+        });
+
+        if (!response.ok) throw new Error('Ошибка загрузки изображение');
+
+        const result = await response.json();
+        uploadStatus.value = result.message || 'изображение успешно загружено';
+      } catch (error) {
+        uploadStatus.value = `Ошибка: ${error.message}`;
+      }
+    };
 
     return {
       formData, 
       close, 
       submitForm,
       test2,
-      formImage
+      formImage,
+      handleFileUpload,
+      uploadImage,
+      uploadStatus
     };
   },
 });
