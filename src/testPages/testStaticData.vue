@@ -9,18 +9,24 @@
     </div>
   </div>
   <div>
-    <TestSubmit 
+    <testSubmit 
       @click="sendDataToParent"
+      :testMessage="textTest"
     />
   </div>
 </template>
 
 <script>
-import TestSubmit from './testChilds/TestSubmit.vue';
+import testSubmit from './testChilds/TestSubmit.vue';
 
 export default {
   name: 'testStaticData',
-  components: { TestSubmit },
+  components: { testSubmit },
+  data() {
+    return {
+      textTest: 'тут какое то другое сообщение оно было передано к родительскому уровню',
+    }  
+  },
   methods: {
     sendDataToParent(data) {
       console.log('входящее: ', data);

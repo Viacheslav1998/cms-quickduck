@@ -4,7 +4,7 @@
       <h1>{{ title }}</h1>
       <p>{{ description }}</p>
       <i>{{ tiny }}</i>
-      <br><br>
+      <p>{{ testMessage }}</p>
       <button type="button" class="btn btn-warning" @click="sendDataToParent">Warning</button>
     </div>
     <div style="padding: 10px 0;"></div>
@@ -16,13 +16,20 @@
 
 <script>
 export default {
-  name: 'TestSubmit',
+  name: 'testSubmit',
   emits: ['click'],
+  props: {
+    testMessage: {
+      type: String,
+      required: true,
+      default: 'если ты ничего не передашь к родителям то увидишь данный месадж',
+    },
+  },
   data() {
     return {
       title: 'Конкретно этот блок дочерний',
       description: 'Отсюда будут выводится нужные данные',
-      tiny: 'это всего лишь для понимания Emits|Props|Data'
+      tiny: 'это всего лишь для понимания Emits | Props | Data',
     }
   },
   methods: {
