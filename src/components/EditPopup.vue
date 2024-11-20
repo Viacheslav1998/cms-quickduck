@@ -41,7 +41,7 @@
           {{ uploadStatus }}
         </p>
         <div style="border: 1px solid sandybrown; margin: 0 0 20px 0;"></div>
-        <button class="custom-b red-b" type="button" @click="close">Закры́ть</button>
+        <button class="red-custom red-b" type="button" @click="close">Закры́ть</button>
       </div>
     </div>
   </transition>
@@ -171,7 +171,7 @@ form input {
   margin-bottom: 10px;
 }
 
-.custom-b1, .custom-b2 {
+.custom-b1, .custom-b2, .red-custom {
   border: none;
   transition: all 0.2s ease;
 }
@@ -182,8 +182,6 @@ form input {
 .custom-b2 {
   margin: 10px 0 -20px 0;
 }
-
-
 .custom-b {
   margin-left: 20px!important;
 }
@@ -193,20 +191,22 @@ form input {
   transition: all 0.2s ease;
 }
 .green-b {
-  background-color: rgb(70, 80, 55);
+  background-color: rgb(120, 102, 86);
   padding: 10px;
   border-radius: 10px;
   font-size: 18px;
   font-weight: bold;
-  color: white;
+  color: blanchedalmond;
 }
 .green-b:hover {
-  background-color: greenyellow;
-  color: black;
+  background-color: rgb(210, 150, 98);
+  color: white;
 }
-
+.red-custom {
+  margin-left:8px;
+}
 .red-b {
-  background-color: rgb(183, 50, 20);
+  background-color: #a84333;
   padding: 10px;
   border-radius: 10px;
   font-size: 18px;
