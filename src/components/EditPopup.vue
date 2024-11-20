@@ -206,7 +206,7 @@ form input {
   margin-left:8px;
 }
 .red-b {
-  background-color: #a84333;
+  background-color: #a13f30;
   padding: 10px;
   border-radius: 10px;
   font-size: 18px;
@@ -214,8 +214,7 @@ form input {
   color: white;
 }
 .red-b:hover {
-  background-color: gold;
-  color: black;
+  background-color: #6e2c22;
 }
 
 .fade-enter-active, .fade-leave-active {
