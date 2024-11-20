@@ -40,8 +40,10 @@ export default defineComponent({
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(updatedItem),
         });
+
+        
         // need add poppup/alert
-        if (!response.ok) throw new Error ('Ошибка при обновлении'); 
+        if (!response.ok) throw new Error ('Ошибка при обновлении begin'); 
 
         const index = news.value.findIndex((n) => n.id === updatedItem.id);
         if (index !== -1) news.value[index] = updatedItem;
@@ -50,6 +52,9 @@ export default defineComponent({
       } catch (error) {
         console.error('Ошибка при обновлении: ', error);
       }
+
+      const result = await response.json();
+        console.log('ответ сервера: ', result);
     };
 
     // delete news = id

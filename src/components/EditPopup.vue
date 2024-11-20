@@ -16,8 +16,8 @@
             </div>
             <div class="p-2">
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Изменить описание (возможности ограничены)</label>
-                <textarea v-model="formData.desk" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <label for="description">Изменить описание (возможности ограничены)</label>
+                <textarea v-model="formData.desk" class="form-control" id="description" rows="3"></textarea>
               </div>
             </div>
             <button class="custom-b1 green-b" type="submit">Cохрани́ть</button>
@@ -60,17 +60,13 @@ export default defineComponent({
   emits: ['close', 'update', 'testUpd'],
 
   setup(props, { emit }) {
-
     const imageFile = ref(null);
     const uploadStatus = ref('');
-
+    
     const formData = ref({
       name: '', 
       title: '',
-    });
-
-    const formImage = ref({
-      path_to_image: '',
+      desk: '',
     });
 
     //upd data
@@ -84,13 +80,11 @@ export default defineComponent({
       { immediate: true }
     );
     const close = () => emit('close');
-    const submitForm = () => {
-      emit('update', { ...formData.value, id: props.newsItem.id });
-      close();
-    };
 
-    const test2 = () => {
-      console.log('current event work')
+    const submitForm = () => {
+      console.log('Отправленные данные: ', formData.value);
+      emit('update', { ...formData.value, id: props.newsItem?.id });
+      close();
     };
 
     const handleFileUpload = (event) => {
@@ -125,8 +119,7 @@ export default defineComponent({
       formData, 
       close, 
       submitForm,
-      test2,
-      formImage,
+      imageFile,
       handleFileUpload,
       uploadImage,
       uploadStatus
