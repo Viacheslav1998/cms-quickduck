@@ -144,10 +144,10 @@ export default defineComponent({
 }
 
 .popup-content {
-  background-color :#EB5C52;
+  background-color :#26262f;
   padding: 20px;
   border-radius: 8px;
-  width: 300px;
+  width: 800px;
 }
 
 form input {
