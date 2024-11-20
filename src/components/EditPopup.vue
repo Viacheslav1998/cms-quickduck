@@ -2,41 +2,45 @@
   <transition name="fade">
     <div v-if="isVisible" class="popup-overlay">
       <div class="popup-content">
-        <h3>Редактировать Новость</h3>
-        <form @submit.prevent="submitForm">
-          <label>Название: </label>
-          <input v-model="formData.name" required />
-
-          <label>Заголовок: </label>
-          <input v-model="formData.title" required />
-
-          <label>Обновить заполнение <span style="color: black; font-size: 12px;">(возможности ограничены)</span></label>
-          <textarea class="area-c" v-model="formData.desk" name="desk"></textarea>
-
-          <br>
-          <button class="custom-b green-b" type="submit">Cохрани́ть</button>
-        </form>
-        <div style="border: 1px solid black; margin: 20px 0;"></div>
-        <b style="color: white;">Изменить картинку</b>
-
-        <form @submit.prevent="test2">
-          <label>проверка для формы</label>
-          <input type="text" v-model="formImage.path_to_image">
-          <br>
-          <button class="custom-b green-b" type="submit">Cохрани́ть</button>
-        </form>
-        <div style="border: 1px solid black; margin: 20px 0;"></div>
-        <form @submit.prevent="uploadImages">
-          <label style="font-size: 16px;">обновить текущее изображение</label>
-          <input type="file" @change="handleFileUpload" required />
-          <button class="custom-b green-b" type="submit">Обновить картинку</button>
-        </form>
+        <div class="d-flex flex-column">
+          <h3>Редактировать Новость</h3>
+          <div style="border: 1px solid sandybrown; margin: 0 0 20px 0;"></div>
+          <form @submit.prevent="submitForm">
+            <div class="p-2">
+              <label>Название: </label><br>
+              <input v-model="formData.name" required />
+            </div>
+            <div class="p-2">
+              <label>Заголовок: </label><br>
+              <input v-model="formData.title" required />
+            </div>
+            <div class="p-2">
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Изменить описание (возможности ограничены)</label>
+                <textarea v-model="formData.desk" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </div>
+            <button class="custom-b1 green-b" type="submit">Cохрани́ть</button>
+          </form>
+        </div>
+        <div style="border: 1px solid sandybrown; margin: 30px 0 20px 0;"></div>
+        <h3 style="color: white;">Изменить картинку</h3>
+        <div class="d-flex flex-column">
+          <form @submit.prevent="test2">
+            <div class="p-2">
+              <label style="font-size: 16px;">обновить текущее изображение</label><br>
+              <input type="file" @change="handleFileUpload" required /><br>
+              <button class="custom-b2 green-b" type="submit">Обновить картинку</button>
+            </div>
+            <br>
+          </form>
+        </div>
         <p 
           v-if="uploadStatus"
         >
           {{ uploadStatus }}
         </p>
-        <div style="border: 1px solid black; margin: 20px 0;"></div>
+        <div style="border: 1px solid sandybrown; margin: 0 0 20px 0;"></div>
         <button class="custom-b red-b" type="button" @click="close">Закры́ть</button>
       </div>
     </div>
@@ -167,9 +171,25 @@ form input {
   margin-bottom: 10px;
 }
 
+.custom-b1, .custom-b2 {
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.custom-b1 {
+  margin-left: 7px;
+}
+.custom-b2 {
+  margin: 10px 0 -20px 0;
+}
+
+
+.custom-b {
+  margin-left: 20px!important;
+}
 .custom-b {
   border: none;
-  margin: 4px;
+  margin: 4px 0 4px 7px;
   transition: all 0.2s ease;
 }
 .green-b {
