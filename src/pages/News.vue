@@ -48,13 +48,27 @@ export default defineComponent({
         const index = news.value.findIndex((n) => n.id === updatedItem.id);
         if (index !== -1) news.value[index] = updatedItem;
 
-        console.log('Новость обновлена');
+        const data = await response.json();
+        if (response.ok) {
+          Swal.fire({
+            title: 'Ура',
+            text: data.message,
+            icon: 'success',
+            confirmButtonText: 'Закрыть',
+          });
+        }
+        
       } catch (error) {
+        if (response.ok) {
+          Swal.fire({
+            title: 'ошибка ! не удалось',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'Закрыть',
+          });
+        }
         console.error('Ошибка при обновлении: ', error);
       }
-
-      const result = await response.json();
-        console.log('ответ сервера: ', result);
     };
 
     // delete news = id

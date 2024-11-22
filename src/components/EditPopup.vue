@@ -82,7 +82,6 @@ export default defineComponent({
     const close = () => emit('close');
 
     const submitForm = () => {
-      console.log('Отправленные данные: ', formData.value);
       emit('update', { ...formData.value, id: props.newsItem?.id });
       close();
     };
