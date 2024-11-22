@@ -70,7 +70,7 @@ p {
   padding: 10px;
 }
 .time-widget p {
-  background-color: #005cb2;
+  background-color: #424141;
   padding: 20px;
   border-radius: 10px;
   color: white;}

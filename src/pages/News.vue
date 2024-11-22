@@ -225,7 +225,7 @@ export default defineComponent({
 .edt:hover { color: #F07427;}
 .link { color: silver;}
 .link:hover { color: white;}
-/* end linkg */
+/* end links */
 .m-top {margin-top: 20px;}
 /* translate */
 .fade-enter-active, .fade-leave-active {
