@@ -26,16 +26,17 @@
         <div style="border: 1px solid sandybrown; margin: 30px 0 20px 0;"></div>
         <h3 style="color: white;">Изменить картинку</h3>
         <div class="d-flex flex-column">
-          <form @submit.prevent="test2">
+          <form @submit.prevent="uploadImage">
             <div class="p-2">
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
-              <input type="file" @change="handleFileUpload" required /><br>
+              <input type="file" name="path_to_image" @change="handleFileUpload" required /><br>
               <button class="custom-b2 green-b" type="submit">Обновить картинку</button>
             </div>
             <br>
           </form>
         </div>
         <p 
+          style="color: orchid;"
           v-if="uploadStatus"
         >
           {{ uploadStatus }}
@@ -96,6 +97,7 @@ export default defineComponent({
         return;
       }
 
+      // path_to_images
       const formDataImage = new FormData();
       formDataImage.append('image', imageFile.value);
 

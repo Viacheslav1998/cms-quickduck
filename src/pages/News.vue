@@ -33,6 +33,7 @@ export default defineComponent({
       isPopupVisible.value = true;
     };
 
+    // upd
     const updateNews = async (updatedItem) => {
       try {
         const response = await fetch(`http://quickduck.com/api/news/${updatedItem.id}`, {
@@ -107,6 +108,8 @@ export default defineComponent({
         });
       }
     };
+
+    // upd iamge
 
     onMounted(async () => {
       news.value = await getData()
