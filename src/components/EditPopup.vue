@@ -26,7 +26,7 @@
         <div style="border: 1px solid sandybrown; margin: 30px 0 20px 0;"></div>
         <h3 style="color: white;">Изменить картинку</h3>
         <div class="d-flex flex-column">
-          <form @submit.prevent="uploadImage">
+          <form @submit.prevent="submitFormUpdate">
             <div class="p-2">
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
               <input type="file" name="path_to_image" @change="handleFileUpload" required /><br>
@@ -87,6 +87,11 @@ export default defineComponent({
       close();
     };
 
+    const submitFormUpdate = () => {
+      emit('updateImage', { ...formData.value, id: props.newsItem?.id});
+      close();
+    }
+
     const handleFileUpload = (event) => {
       imageFile.value = event.target.files[0];
     };
@@ -120,6 +125,7 @@ export default defineComponent({
       formData, 
       close, 
       submitForm,
+      submitFormUpdate,
       imageFile,
       handleFileUpload,
       uploadImage,

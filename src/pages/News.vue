@@ -109,7 +109,10 @@ export default defineComponent({
       }
     };
 
-    // upd iamge
+    // update only image
+    const submitFormUpdateImage = (postId) => {
+      console.log(postId);
+    }
 
     onMounted(async () => {
       news.value = await getData()
@@ -122,6 +125,7 @@ export default defineComponent({
       selectedNews,
       openEditPopup,
       updateNews,
+      submitFormUpdateImage,
       deleteNews
     };
   },
@@ -187,7 +191,7 @@ export default defineComponent({
       :newsItem="selectedNews"
       @close="isPopupVisible = false"
       @update="updateNews"
-      @testUpd="parendEventTest"
+      @updateImage="submitFormUpdateImage"
     />
     
   </div>
