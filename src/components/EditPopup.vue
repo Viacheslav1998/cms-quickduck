@@ -29,9 +29,15 @@
           <form @submit.prevent="submitFormUpdate">
             <div class="p-2">
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
-              <input type="file" name="path_to_image" @change="handleFileUpload" required /><br>
+              <input 
+                type="file"
+                name="path_to_image"
+                @change="onFileChange"
+              />
+              <br>
               <button class="custom-b2 green-b" type="submit">Обновить картинку</button>
             </div>
+            <p v-if="imageFile">Выбрано: {{ imageFile.name }}</p>
             <br>
           </form>
         </div>
@@ -58,12 +64,13 @@ export default defineComponent({
     newsItem: Object,
   },
 
-  emits: ['close', 'update', 'testUpd'],
+  emits: ['close', 'update', 'fileUpload'],
 
   setup(props, { emit }) {
     const imageFile = ref(null);
     const uploadStatus = ref('');
-    
+    const file = ref('');
+
     const formData = ref({
       name: '', 
       title: '',
@@ -80,6 +87,7 @@ export default defineComponent({
       },
       { immediate: true }
     );
+
     const close = () => emit('close');
 
     const submitForm = () => {
@@ -92,44 +100,52 @@ export default defineComponent({
       close();
     }
 
-    const handleFileUpload = (event) => {
-      imageFile.value = event.target.files[0];
-    };
+    const onFileChange = (event) => {
+      const file = event.target.files[0];
+      emit('fileUpload', file);
+    }
 
-    const uploadImage = async () => {
-      if (!imageFile.value) {
-        uploadStatus.value = 'а ты выбрал файл?';
-        return;
-      }
 
-      // path_to_images
-      const formDataImage = new FormData();
-      formDataImage.append('image', imageFile.value);
+    // const handleFileUpload = (event) => {
+    //   imageFile.value = event.target.files[0];
+    // };
 
-      try {
-        const response = await fetch(`http://quickduck.com/api/news/${id}/update-image`, {
-          method: 'POST',
-          body: formDataImage
-        });
+    // const uploadImage = async () => {
+    //   if (!imageFile.value) {
+    //     uploadStatus.value = 'а ты выбрал файл?';
+    //     return;
+    //   }
 
-        if (!response.ok) throw new Error('Ошибка загрузки изображение');
+    //   // path_to_images
+    //   const formDataImage = new FormData();
+    //   formDataImage.append('image', imageFile.value);
 
-        const result = await response.json();
-        uploadStatus.value = result.message || 'изображение успешно загружено';
-      } catch (error) {
-        uploadStatus.value = `Ошибка: ${error.message}`;
-      }
-    };
+    //   try {
+    //     const response = await fetch(`http://quickduck.com/api/news/${id}/update-image`, {
+    //       method: 'POST',
+    //       body: formDataImage
+    //     });
+
+    //     if (!response.ok) throw new Error('Ошибка загрузки изображение');
+
+    //     const result = await response.json();
+    //     uploadStatus.value = result.message || 'изображение успешно загружено';
+    //   } catch (error) {
+    //     uploadStatus.value = `Ошибка: ${error.message}`;
+    //   }
+    // };
 
     return {
       formData, 
       close, 
       submitForm,
       submitFormUpdate,
-      imageFile,
-      handleFileUpload,
-      uploadImage,
-      uploadStatus
+      onFileChange,
+      file,
+    
+      // handleFileUpload,
+      // uploadImage,
+      // uploadStatus
     };
   },
 });

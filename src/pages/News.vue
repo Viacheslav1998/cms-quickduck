@@ -10,6 +10,7 @@ export default defineComponent({
     const news = ref([])
     const isPopupVisible = ref(false)
     const selectedNews = ref(null)
+    const imageFile = ref(null)
 
     // get All news
     async function getData() {
@@ -33,7 +34,7 @@ export default defineComponent({
       isPopupVisible.value = true;
     };
 
-    // upd
+    // update
     const updateNews = async (updatedItem) => {
       try {
         const response = await fetch(`http://quickduck.com/api/news/${updatedItem.id}`, {
@@ -42,8 +43,6 @@ export default defineComponent({
           body: JSON.stringify(updatedItem),
         });
 
-        
-        // need add poppup/alert
         if (!response.ok) throw new Error ('Ошибка при обновлении begin'); 
 
         const index = news.value.findIndex((n) => n.id === updatedItem.id);
@@ -109,9 +108,15 @@ export default defineComponent({
       }
     };
 
+    // 
+    const handleFileUpload = (file) => {
+      imageFile.value = file;
+    }
+
     // update only image
-    const submitFormUpdateImage = (postId) => {
-      console.log(postId);
+    const submitFormUpdateImage = (currentNews) => {
+      const id = currentNews.id;
+      console.log(imageFile.value);
     }
 
     onMounted(async () => {
@@ -125,8 +130,10 @@ export default defineComponent({
       selectedNews,
       openEditPopup,
       updateNews,
+      imageFile,
       submitFormUpdateImage,
-      deleteNews
+      deleteNews,
+      handleFileUpload
     };
   },
 });
@@ -192,6 +199,7 @@ export default defineComponent({
       @close="isPopupVisible = false"
       @update="updateNews"
       @updateImage="submitFormUpdateImage"
+      @fileUpload="handleFileUpload"
     />
     
   </div>
