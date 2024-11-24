@@ -37,16 +37,16 @@
               <br>
               <button class="custom-b2 green-b" type="submit">Обновить картинку</button>
             </div>
-            <p v-if="imageFile">Выбрано: {{ imageFile.name }}</p>
+            <p 
+              style="color: red;"
+              v-if="imageFile"
+            >
+              Выбрано: {{ imageFile.name }}
+            </p>
             <br>
           </form>
         </div>
-        <p 
-          style="color: orchid;"
-          v-if="uploadStatus"
-        >
-          {{ uploadStatus }}
-        </p>
+   
         <div style="border: 1px solid sandybrown; margin: 0 0 20px 0;"></div>
         <button class="red-custom red-b" type="button" @click="close">Закры́ть</button>
       </div>
@@ -63,12 +63,14 @@ export default defineComponent({
     isVisible: Boolean, 
     newsItem: Object,
   },
-
-  emits: ['close', 'update', 'fileUpload', 'updateImage'],
-
+  emits: [
+    'close',
+    'update',
+    'fileUpload',
+    'updateImage',
+  ],
   setup(props, { emit }) {
     const imageFile = ref(null);
-    const uploadStatus = ref('');
     const file = ref('');
 
     const formData = ref({
@@ -97,7 +99,6 @@ export default defineComponent({
 
     const submitFormUpdate = () => {
       emit('updateImage', { ...formData.value, id: props.newsItem?.id});
-      close();
     }
 
     const onFileChange = (event) => {
@@ -111,10 +112,6 @@ export default defineComponent({
     // };
 
     // const uploadImage = async () => {
-    //   if (!imageFile.value) {
-    //     uploadStatus.value = 'а ты выбрал файл?';
-    //     return;
-    //   }
 
     //   // path_to_images
     //   const formDataImage = new FormData();
@@ -142,10 +139,9 @@ export default defineComponent({
       submitFormUpdate,
       onFileChange,
       file,
-      imageFile
+      imageFile,
       // handleFileUpload,
       // uploadImage,
-      // uploadStatus
     };
   },
 });

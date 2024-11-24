@@ -118,7 +118,6 @@ export default defineComponent({
       const id = currentNews.id;
       console.log(imageFile.value);
     }
-
     onMounted(async () => {
       news.value = await getData()
     });
@@ -133,7 +132,7 @@ export default defineComponent({
       imageFile,
       submitFormUpdateImage,
       deleteNews,
-      handleFileUpload
+      handleFileUpload,
     };
   },
 });
@@ -200,8 +199,7 @@ export default defineComponent({
       @update="updateNews"
       @updateImage="submitFormUpdateImage"
       @fileUpload="handleFileUpload"
-    />
-    
+    />    
   </div>
 </template>
 
