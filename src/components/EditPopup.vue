@@ -37,12 +37,13 @@
               <br>
               <button class="custom-b2 green-b" type="submit">Обновить картинку</button>
             </div>
-            <b 
-              style="color: rebeccapurple;"
-              v-if="imageFile"
-            >
-              Выбрано: {{ imageFile.name }}
-            </b>
+            <div class="attention">
+              <b 
+                v-if="imageFile"
+              >
+                Выбрано: {{ imageFile }}
+              </b>
+            </div>
             <br>
           </form>
         </div>
@@ -103,8 +104,9 @@ export default defineComponent({
 
     const onFileChange = (event) => {
       const file = event.target.files[0];
-      console.log(file);
-      console.log('но это уже из дочернего');
+      if (file) {
+        imageFile.value = file.name;
+      };
     }
 
 
@@ -165,6 +167,16 @@ export default defineComponent({
   padding: 20px;
   border-radius: 8px;
   width: 800px;
+}
+
+.attention {
+  color: rgb(210, 150, 98);
+  padding: 20px 0 0px 10px;
+}
+.attention b {
+  border-radius: 7px;
+  padding: 10px;
+  background-color: #343440;;
 }
 
 form input {
