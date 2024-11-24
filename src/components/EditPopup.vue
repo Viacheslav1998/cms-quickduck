@@ -64,7 +64,7 @@ export default defineComponent({
     newsItem: Object,
   },
 
-  emits: ['close', 'update', 'fileUpload'],
+  emits: ['close', 'update', 'fileUpload', 'updateImage'],
 
   setup(props, { emit }) {
     const imageFile = ref(null);
@@ -142,7 +142,7 @@ export default defineComponent({
       submitFormUpdate,
       onFileChange,
       file,
-    
+      imageFile
       // handleFileUpload,
       // uploadImage,
       // uploadStatus
