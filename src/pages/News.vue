@@ -108,16 +108,7 @@ export default defineComponent({
       }
     };
 
-    // 
-    const handleFileUpload = (file) => {
-      imageFile.value = file;
-    }
 
-    // update only image
-    const submitFormUpdateImage = (currentNews) => {
-      const id = currentNews.id;
-      console.log(imageFile.value);
-    }
     onMounted(async () => {
       news.value = await getData()
     });
@@ -130,9 +121,7 @@ export default defineComponent({
       openEditPopup,
       updateNews,
       imageFile,
-      submitFormUpdateImage,
       deleteNews,
-      handleFileUpload,
     };
   },
 });
@@ -197,8 +186,6 @@ export default defineComponent({
       :newsItem="selectedNews"
       @close="isPopupVisible = false"
       @update="updateNews"
-      @updateImage="submitFormUpdateImage"
-      @fileUpload="handleFileUpload"
     />    
   </div>
 </template>
