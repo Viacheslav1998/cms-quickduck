@@ -31,7 +31,6 @@
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
               <input 
                 type="file"
-                name="path_to_image"
                 @change="onFileChange"
               />
               <br>
@@ -71,7 +70,7 @@ export default defineComponent({
     'updateImage',
   ],
   setup(props, { emit }) {
-    const imageFile = ref(null);
+    const imageFile = ref('');
     const file = ref('');
 
     const formData = ref({
@@ -99,41 +98,25 @@ export default defineComponent({
     };
 
     const submitFormUpdate = () => {
-      emit('updateImage', { ...formData.value, id: props.newsItem?.id});
-    }
+      if (imageFile.value) {
+        emit('updateImage', { ...formData.value, id: props.newsItem?.id});
+      } else {
+        Swal.fire({
+          title: 'Ошибка',
+          text: 'Не выбрано изображение для обновления',
+          icon: 'error',
+          confirmButtonText: 'Закрыть',
+        });
+      }
+    };
 
     const onFileChange = (event) => {
       const file = event.target.files[0];
       if (file) {
         imageFile.value = file.name;
-      };
-    }
-
-
-    // const handleFileUpload = (event) => {
-    //   imageFile.value = event.target.files[0];
-    // };
-
-    // const uploadImage = async () => {
-
-    //   // path_to_images
-    //   const formDataImage = new FormData();
-    //   formDataImage.append('image', imageFile.value);
-
-    //   try {
-    //     const response = await fetch(`http://quickduck.com/api/news/${id}/update-image`, {
-    //       method: 'POST',
-    //       body: formDataImage
-    //     });
-
-    //     if (!response.ok) throw new Error('Ошибка загрузки изображение');
-
-    //     const result = await response.json();
-    //     uploadStatus.value = result.message || 'изображение успешно загружено';
-    //   } catch (error) {
-    //     uploadStatus.value = `Ошибка: ${error.message}`;
-    //   }
-    // };
+        emit('fileUpload', file);
+      }
+    };
 
     return {
       formData, 
@@ -143,8 +126,6 @@ export default defineComponent({
       onFileChange,
       file,
       imageFile,
-      // handleFileUpload,
-      // uploadImage,
     };
   },
 });

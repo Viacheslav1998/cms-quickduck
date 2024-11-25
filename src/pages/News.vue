@@ -34,7 +34,7 @@ export default defineComponent({
       isPopupVisible.value = true;
     };
 
-    // update
+    // update news
     const updateNews = async (updatedItem) => {
       try {
         const response = await fetch(`http://quickduck.com/api/news/${updatedItem.id}`, {
@@ -108,9 +108,53 @@ export default defineComponent({
       }
     };
 
+    // update image current news
+    const updateImage = async (updateItem) => {
+      try {
+      const formData = new FormData();
+      console.log(formData);
+      // вероятно добовлять либо по имени у нас там path_to_image
+      formData.append('file', imageFile.value);
+      
+      // тут тоже внимательнее и путь и updateItem
+      const response = await fetch(`http://quickduck.com/api/news/${updateItem.id}/update-image`, {
+        method: 'POST',
+        body: formData,
+      });
+      
+
+      // warn need update this..
+      if (!respond.ok) throw new Error('Ошибка при обновлении изображения');
+
+      const data = await response.json();
+      if (data.status === 'success') {
+        const index = news.value.findIndex((n) => n.id === updatedItem.id);
+        if (index !== -1) news.value[index] = updateItem;
+        Swal.fire({
+          title: 'Успех',
+          text: data.message,
+          icon: 'success',
+          confirmButtonText: 'Закрыть' 
+        });
+      } 
+      } catch (error) {
+        console.error('ошибка при обновлении изображения: ', error);
+        Swal.fire({
+          title: 'Ошибка',
+          text: error.message || 'Что-то пошло не так.',
+          icon: 'error',
+          confirmButtonText: 'Закрыть',
+        });
+      }
+    };
+
+    // event select current image
+    const handleFileUpload = (file) => {
+      console.log('загруженный файл: ', file);
+    };
 
     onMounted(async () => {
-      news.value = await getData()
+      news.value = await getData();
     });
 
     return {
@@ -122,6 +166,8 @@ export default defineComponent({
       updateNews,
       imageFile,
       deleteNews,
+      updateImage,
+      handleFileUpload
     };
   },
 });
@@ -186,6 +232,8 @@ export default defineComponent({
       :newsItem="selectedNews"
       @close="isPopupVisible = false"
       @update="updateNews"
+      @updateImage="updateImage"
+      @fileUpload="handleFileUpload"
     />    
   </div>
 </template>
