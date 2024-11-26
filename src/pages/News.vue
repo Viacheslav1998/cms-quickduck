@@ -7,10 +7,10 @@ export default defineComponent({
   name: 'News',
   components: { EditPopup },
   setup() {
-    const news = ref([])
-    const isPopupVisible = ref(false)
-    const selectedNews = ref(null)
-    const imageFile = ref(null)
+    const news = ref([]);
+    const isPopupVisible = ref(false);
+    const selectedNews = ref(null);
+    const imageFile = ref(null);
 
     // get All news
     async function getData() {
@@ -109,34 +109,30 @@ export default defineComponent({
     };
 
     // update image current news
-    const updateImage = async (updateItem) => {
+    const updateImage = async (current) => {
       try {
-      const formData = new FormData();
-      console.log(updateItem);
-      // вероятно добовлять либо по имени у нас там path_to_image
-      formData.append('path_to_image', imageFile.value);
-      
-      // тут тоже внимательнее и путь и updateItem
-      const response = await fetch(`http://quickduck.com/api/news/${updateItem.id}/update-image`, {
-        method: 'POST',
-        body: formData,
-      });
-      
-
-      // warn need update this..
-      if (!response.ok) throw new Error('Ошибка при обновлении изображения');
-
-      const data = await response.json();
-      if (data.status === 'success') {
-        const index = news.value.findIndex((n) => n.id === updatedItem.id);
-        if (index !== -1) news.value[index] = updateItem;
-        Swal.fire({
-          title: 'Успех',
-          text: data.message,
-          icon: 'success',
-          confirmButtonText: 'Закрыть' 
+        const formData = new FormData();
+        formData.append('file', imageFile.value);
+        
+        const response = await fetch(`http://quickduck.com/api/news/${current.id}/update-image`, {
+          method: 'POST',
+          body: formData,
         });
-      } 
+
+        // warn need update this..
+        if (!response.ok) throw new Error('Ошибка при обновлении изображения');
+
+        const data = await response.json();
+        if (data.status === 'success') {
+          const index = news.value.findIndex((n) => n.id === current.id);
+          if (index !== -1) news.value[index].path_to_image = data.newImagePath;
+          Swal.fire({
+            title: 'Успех',
+            text: data.message,
+            icon: 'success',
+            confirmButtonText: 'Закрыть' 
+          });
+        } 
       } catch (error) {
         console.error('ошибка при обновлении изображения: ', error);
         Swal.fire({
@@ -150,7 +146,7 @@ export default defineComponent({
 
     // event select current image
     const handleFileUpload = (file) => {
-      console.log('загруженный файл: ', file);
+      imageFile.value = file;
     };
 
     onMounted(async () => {
@@ -167,7 +163,7 @@ export default defineComponent({
       imageFile,
       deleteNews,
       updateImage,
-      handleFileUpload
+      handleFileUpload,
     };
   },
 });

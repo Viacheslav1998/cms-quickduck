@@ -94,11 +94,13 @@ export default defineComponent({
 
     const close = () => emit('close');
 
+    // only update text
     const submitForm = () => {
       emit('update', { ...formData.value, id: props.newsItem?.id });
       close();
     };
-
+    
+    // only update imagen
     const submitFormUpdate = () => {
       if (imageFile.value) {
         emit('updateImage', { ...formData.value, id: props.newsItem?.id});
