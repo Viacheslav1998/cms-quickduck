@@ -112,11 +112,14 @@ export default defineComponent({
     const updateImage = async (current) => {
       try {
         const formData = new FormData();
-        formData.append('file', imageFile.value);
-        
-        const response = await fetch(`http://quickduck.com/api/news/${current.id}/update-image`, {
+        formData.append('path_to_image', imageFile.value);
+
+        const response = await fetch(`http://quickduck.com/api/update-imagen/${current.id}`, {
           method: 'POST',
           body: formData,
+          headers: {
+            'Accept': 'application/json'
+          },
         });
 
         // warn need update this..
