@@ -112,9 +112,9 @@ export default defineComponent({
     const updateImage = async (updateItem) => {
       try {
       const formData = new FormData();
-      console.log(formData);
+      console.log(updateItem);
       // вероятно добовлять либо по имени у нас там path_to_image
-      formData.append('file', imageFile.value);
+      formData.append('path_to_image', imageFile.value);
       
       // тут тоже внимательнее и путь и updateItem
       const response = await fetch(`http://quickduck.com/api/news/${updateItem.id}/update-image`, {
@@ -124,7 +124,7 @@ export default defineComponent({
       
 
       // warn need update this..
-      if (!respond.ok) throw new Error('Ошибка при обновлении изображения');
+      if (!response.ok) throw new Error('Ошибка при обновлении изображения');
 
       const data = await response.json();
       if (data.status === 'success') {

@@ -56,6 +56,8 @@
 
 <script>
 import { defineComponent, ref, watch } from 'vue';
+import Swal from 'sweetalert2';
+
 
 export default defineComponent({
   name: 'EditPopup',
