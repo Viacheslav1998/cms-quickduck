@@ -108,50 +108,6 @@ export default defineComponent({
       }
     };
 
-    // update image current news
-    const updateImage = async (current) => {
-      try {
-        const formData = new FormData();
-        formData.append('path_to_image', imageFile.value);
-
-        const response = await fetch(`http://quickduck.com/api/update-imagen/${current.id}`, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          },
-        });
-
-        // warn need update this..
-        if (!response.ok) throw new Error('Ошибка при обновлении изображения');
-
-        const data = await response.json();
-        if (data.status === 'success') {
-          const index = news.value.findIndex((n) => n.id === current.id);
-          if (index !== -1) news.value[index].path_to_image = data.newImagePath;
-          Swal.fire({
-            title: 'Успех',
-            text: data.message,
-            icon: 'success',
-            confirmButtonText: 'Закрыть' 
-          });
-        } 
-      } catch (error) {
-        console.error('ошибка при обновлении изображения: ', error);
-        Swal.fire({
-          title: 'Ошибка',
-          text: error.message || 'Что-то пошло не так.',
-          icon: 'error',
-          confirmButtonText: 'Закрыть',
-        });
-      }
-    };
-
-    // event select current image
-    const handleFileUpload = (file) => {
-      imageFile.value = file;
-    };
-
     onMounted(async () => {
       news.value = await getData();
     });
@@ -165,8 +121,6 @@ export default defineComponent({
       updateNews,
       imageFile,
       deleteNews,
-      updateImage,
-      handleFileUpload,
     };
   },
 });
@@ -231,8 +185,6 @@ export default defineComponent({
       :newsItem="selectedNews"
       @close="isPopupVisible = false"
       @update="updateNews"
-      @updateImage="updateImage"
-      @fileUpload="handleFileUpload"
     />    
   </div>
 </template>

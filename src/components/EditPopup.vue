@@ -31,6 +31,7 @@
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
               <input 
                 type="file"
+                name="path_to_image"
                 @change="onFileChange"
               />
               <br>
@@ -68,12 +69,8 @@ export default defineComponent({
   emits: [
     'close',
     'update',
-    'fileUpload',
-    'updateImage',
   ],
   setup(props, { emit }) {
-    const imageFile = ref('');
-    const file = ref('');
 
     const formData = ref({
       name: '', 
@@ -99,37 +96,11 @@ export default defineComponent({
       emit('update', { ...formData.value, id: props.newsItem?.id });
       close();
     };
-    
-    // only update imagen
-    const submitFormUpdate = () => {
-      if (imageFile.value) {
-        emit('updateImage', { ...formData.value, id: props.newsItem?.id});
-      } else {
-        Swal.fire({
-          title: 'Ошибка',
-          text: 'Не выбрано изображение для обновления',
-          icon: 'error',
-          confirmButtonText: 'Закрыть',
-        });
-      }
-    };
-
-    const onFileChange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        imageFile.value = file.name;
-        emit('fileUpload', file);
-      }
-    };
 
     return {
       formData, 
       close, 
       submitForm,
-      submitFormUpdate,
-      onFileChange,
-      file,
-      imageFile,
     };
   },
 });
