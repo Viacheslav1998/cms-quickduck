@@ -3,7 +3,10 @@
 <template>
   <div class="container">
     <div class="footer">
-      <p><span>Подвал </span><br>совершенствовать свое приложение без конца - это не предел<br><br>
+      <p><span>Подвал </span>
+        <p style="margin: 10px 5px;">совершенствовать свое приложение без конца - это не предел</p>
+        
+        <span style="color:#000; background-color: #E6BF0B; padding: 5px; margin: 5px; border-radius: 5px; margin-top: 10px;"><b>только для личного использования | не для расспространения</b></span>
         <span style="color:#E6BF0B; background-color: #212121; padding: 5px; border-radius: 5px; margin-top: 10px;"><b>Development SilentStorm</b></span>
       </p>
     </div>
