@@ -2,8 +2,9 @@
   <div class="container">
     <div class="base">
       <span class="" style="color: #373737; background-color: yellowgreen; padding: 5px; margin: 5px 0; border-radius: 5px; margin-top: 10px;"><b>памятка</b></span>
-      <h1><b>THE PROMISE</b></h1>
+      <h1><b>THE PROMISE | CALLBACK | ASYNC | AWAIT</b></h1>
       <span style="color: wheat; font-family: calibri; "><b>Секретная локация любопытного тестировщика</b></span>
+      <br><i style="color: wheat;">вспомним callback функции</i>
     </div>
     <div class="base">
       <p>
@@ -53,6 +54,33 @@
       </button>
       <p>{{ data }}</p>
     </div>
+
+    <div class="base">
+      <h3>Что касается Promise</h3>
+
+      <pre>
+        <code style="color: wheat;">
+          function doSomething() {
+            return new Promise((resolve, reject) => {
+              console.log("Готово.");
+              // Успех в половине случаев.
+              if (Math.random() > 0.5) {
+                resolve("Успех");
+              } else {
+                reject("Ошибка");
+              }
+            });
+          }
+
+          const promise = doSomething();
+          promise.then(successCallback, failureCallback);
+
+          …или просто:
+
+          doSomething().then(successCallback, failureCallback);
+        </code>
+      </pre>
+    </div>
   </div>
 </template>
 
@@ -83,9 +111,37 @@ export default {
 
     const spaceWay = () => {
       oceanSpecial(groveCountry, spb);
+      setTimeout(setDefaultValue, 5000);
     }
 
-    
+    const setDefaultValue = () => {
+      data.value = 'тут значение которое будет измененно';
+    }     
+
+    // you can see The Promise
+
+    function justDoItNow() {
+      return new Promise((resolve, reject) => {
+        console.log('готово.');
+        if (Math.random() > 0.5) {
+          resolve('успех');
+        } else {
+          reject('ошибка');
+        }
+      });
+    }
+
+    const doSmsthng = (result) => {
+      console.log('мы что то сделали и это работает ' + result);
+    }
+
+    const notBuildFunny = (error) => {
+      console.log('вот говорят же - работает не трогай... опять все заруинил XD ' + error);
+    }
+
+
+    const promise = justDoItNow();
+    promise.then(doSmsthng, notBuildFunny)
 
     return {
       data,
