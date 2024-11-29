@@ -24,7 +24,7 @@ export default {
   components: { testSubmit },
   data() {
     return {
-      textTest: 'тут какое то другое сообщение оно было передано к родительскому уровню',
+      textTest: 'этот текст был передан через дочерний компонент',
     }  
   },
   methods: {
