@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="base">
-      <span class="" style="color: #373737; background-color: yellowgreen; padding: 5px; margin: 5px 0; border-radius: 5px; margin-top: 10px;"><b>памятка</b></span>
+      <span style="color: #373737; background-color: yellowgreen; padding: 5px;  border-radius: 5px;"><b>памятка</b></span>
+      <div class="top-line-padding"></div>
       <h1><b>THE PROMISE | CALLBACK | ASYNC | AWAIT</b></h1>
       <span style="color: wheat; font-family: calibri; "><b>Секретная локация любопытного тестировщика</b></span>
       <br><i style="color: wheat;">вспомним callback функции</i>
@@ -170,6 +171,9 @@ h1, p { color: white;}
 }
 .custom-push:active {
   background-color: gold;
+}
+.top-line-padding {
+  margin-bottom: 10px!important;
 }
 
 </style>
