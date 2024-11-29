@@ -6,6 +6,7 @@ import News from './pages/News.vue';
 import Test from './testPages/testAttention.vue';
 import TestStaticData from './testPages/testStaticData.vue';
 import TestPromise from './testPages/testPromise.vue';
+import TestClosure from './testPages/testClosure.vue';
 
 const routes = [
   { path: '/', component: Home },
@@ -13,7 +14,9 @@ const routes = [
   { path: '/news', component: News },
   { path: '/test', component: Test },
   { path: '/test-static', component: TestStaticData },
-  { path: '/test-promise', component: TestPromise },
+  { path: '/test-async', component: TestPromise },
+  { path: '/test-closure', component: TestClosure },
+  
 ];
 
 const router = createRouter({
