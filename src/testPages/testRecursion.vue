@@ -70,9 +70,33 @@ export default {
   name: 'testRecursion',
 
   setup() {
-    function test() {
-      console.log(start);
+    //iteration 
+    function staticX(x, n) {
+      let result = 1;
+      for(let i = 0; i < n; i++) {
+        result *= x;
+      }
+      return result
     }
+
+    setTimeout(() => {
+      console.log(staticX(2, 5));
+    }, 1200);
+
+
+    // recursion
+    function activeMove(x, n) {
+      if (n == 1) {
+        return x;
+      } else {
+        return x * activeMove(x, n - 1);
+      }
+    } 
+
+    setTimeout(() => {
+      console.log( activeMove(2, 2) );
+      console.log('this is test')
+    }, 1200);
   }
 
 }
