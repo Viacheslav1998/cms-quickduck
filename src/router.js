@@ -1,4 +1,3 @@
-// src/router.js
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from './pages/Home.vue'; 
 import AddNews from './pages/AddNews.vue';
@@ -7,6 +6,7 @@ import Test from './testPages/testAttention.vue';
 import TestStaticData from './testPages/testStaticData.vue';
 import TestPromise from './testPages/testPromise.vue';
 import TestClosure from './testPages/testClosure.vue';
+import TestRecursion from './testPages/testRecursion.vue';
 
 const routes = [
   { path: '/', component: Home },
@@ -16,7 +16,7 @@ const routes = [
   { path: '/test-static', component: TestStaticData },
   { path: '/test-async', component: TestPromise },
   { path: '/test-closure', component: TestClosure },
-  
+  { path: '/test-recursion', component: TestRecursion }
 ];
 
 const router = createRouter({
