@@ -31,7 +31,6 @@
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
               <input 
                 type="file"
-                name="path_to_image"
                 @change="onFileChange"
               />
               <br>

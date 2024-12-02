@@ -142,7 +142,26 @@ export default {
 
 
     const promise = justDoItNow();
-    promise.then(doSmsthng, notBuildFunny)
+    promise.then(doSmsthng, notBuildFunny);
+
+    //another
+
+    const choiceWay = new Promise(function(lightWay, badWay) {
+      if ( 1 < 10) {
+        lightWay("Да это верно");
+      } else {
+        badWay("В корне не верно");
+      }
+    });
+
+    choiceWay.then(
+      function(value) { 
+        console.log(value);
+      },
+      function(error) {
+        console.log(error);
+      }
+    );
 
     return {
       data,
