@@ -31,6 +31,7 @@
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
               <input 
                 type="file"
+                ref="path_to_image"
                 @change="handleFileChange"
               />
               <br>
@@ -70,10 +71,10 @@ export default defineComponent({
       desk: '',
     });
 
-    const file = ref(null);
+    const path_to_image = ref(null);
 
     function handleFileChange(event) {
-      file.value = event.target.files[0]
+      path_to_image.value = event.target.files[0];
     }
 
     // attention error
@@ -98,15 +99,36 @@ export default defineComponent({
 
     // handler save file
     async function handleImageUpload() {
-      if (!file.value) {
+      if (!path_to_image.value) {
         showError('Выбери файл для загрузки!');
         return;
       }
 
-      const formData = new FormData();
-      formData.append('image', file.value);
-      console.log(formData);
+      try {
+        const formData = new FormData();
+        formData.append('path_to_image', path_to_image.value);
 
+        console.log('Форма:', formData.get('path_to_image'));
+
+        const response = await fetch(`http://quickduck.com/api/update-imagen/${props.newsItem.id}`, {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.text();
+        console.log(result);
+        console.log(response.status);
+
+        if (!response.ok) {
+          throw new Error(result.message || 'Ошибка при загрузке изображения');
+        }
+
+        showSuccess('Изображение успешно обновленно');
+        emit('update', result);
+
+      } catch (error) {
+        showError(error.message);
+      }
     }
 
     watch(
@@ -132,7 +154,7 @@ export default defineComponent({
       formData, 
       close, 
       submitForm,
-      file,
+      path_to_image,
       handleFileChange,
       handleImageUpload
     };
