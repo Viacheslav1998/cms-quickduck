@@ -76,9 +76,30 @@ export default defineComponent({
 
     function handleFileChange(event) {
       file.value = event.target.files[0]
-      console.log(file.value.name)
     }
-    
+
+    // attention
+    function showError(message) {
+      Swal.fire({
+        title: 'Ошибка',
+        text: message || 'что то пошло не так',
+        icon: 'error',
+        confirmButtonText: 'Закрыть',
+      });
+    }
+
+    // handler save file
+    async function handleImageUpload() {
+      if (!file.value) {
+        showError('Выбери файл для загрузки!');
+        return;
+      }
+
+      const formData = new FormData();
+      console.log(formData);
+
+    }
+
     //upd data
     watch(
       () => props.newsItem,
@@ -104,7 +125,8 @@ export default defineComponent({
       close, 
       submitForm,
       file,
-      handleFileChange
+      handleFileChange,
+      handleImageUpload
     };
   },
 });
