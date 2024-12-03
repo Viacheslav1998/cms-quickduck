@@ -70,21 +70,29 @@ export default defineComponent({
       desk: '',
     });
 
-    //form 2 image
-    const post = ref({id: 1, image: 'current_image_url'});
     const file = ref(null);
 
     function handleFileChange(event) {
       file.value = event.target.files[0]
     }
 
-    // attention
+    // attention error
     function showError(message) {
       Swal.fire({
         title: 'Ошибка',
         text: message || 'что то пошло не так',
         icon: 'error',
         confirmButtonText: 'Закрыть',
+      });
+    }
+
+    // attention success
+    function showSuccess(message) {
+      Swal.fire({
+        title: 'Успех',
+        text: message || 'данные успешно обновлены!',
+        icon: 'success',
+        confirmButtonText: 'Ok',
       });
     }
 
@@ -96,11 +104,11 @@ export default defineComponent({
       }
 
       const formData = new FormData();
+      formData.append('image', file.value);
       console.log(formData);
 
     }
 
-    //upd data
     watch(
       () => props.newsItem,
       (newVal) => {
