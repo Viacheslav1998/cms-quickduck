@@ -75,19 +75,19 @@ export default defineComponent({
         const data = await response.json();
 
         if(data.status === 'success') {
-            Swal.fire({
-              title: 'Создано !',
-              text: data.message,
-              icon: 'success',
-              confirmButtonText: 'Закрыть'
-            })
+          Swal.fire({
+            title: 'Создано !',
+            text: data.message,
+            icon: 'success',
+            confirmButtonText: 'Закрыть'
+          })
         } else {
           Swal.fire({
-              title: 'Ошибка, что то пошло не так!',
-              text: data.message,
-              icon: 'error',
-              confirmButtonText: 'Закрыть'
-            })
+            title: 'Ошибка, что то пошло не так!',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'Закрыть'
+          })
         }
 
         // clear form 

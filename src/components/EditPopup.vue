@@ -26,22 +26,15 @@
         <div style="border: 1px solid sandybrown; margin: 30px 0 20px 0;"></div>
         <h3 style="color: white;">Изменить картинку</h3>
         <div class="d-flex flex-column">
-          <form @submit.prevent="submitFormUpdate">
+          <form @submit.prevent="handleImageUpload">
             <div class="p-2">
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
               <input 
                 type="file"
-                @change="onFileChange"
+                @change="handleFileChange"
               />
               <br>
               <button class="custom-b2 green-b" type="submit">Обновить картинку</button>
-            </div>
-            <div class="attention">
-              <b 
-                v-if="imageFile"
-              >
-                Выбрано: {{ imageFile }}
-              </b>
             </div>
             <br>
           </form>
@@ -70,13 +63,22 @@ export default defineComponent({
     'update',
   ],
   setup(props, { emit }) {
-
+    // form 1 data
     const formData = ref({
       name: '', 
       title: '',
       desk: '',
     });
 
+    //form 2 image
+    const post = ref({id: 1, image: 'current_image_url'});
+    const file = ref(null);
+
+    function handleFileChange(event) {
+      file.value = event.target.files[0]
+      console.log(file.value.name)
+    }
+    
     //upd data
     watch(
       () => props.newsItem,
@@ -88,6 +90,7 @@ export default defineComponent({
       { immediate: true }
     );
 
+    // open/close poppup
     const close = () => emit('close');
 
     // only update text
@@ -100,6 +103,8 @@ export default defineComponent({
       formData, 
       close, 
       submitForm,
+      file,
+      handleFileChange
     };
   },
 });

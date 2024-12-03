@@ -148,18 +148,21 @@ export default {
 
     const choiceWay = new Promise(function(lightWay, badWay) {
       if ( 1 < 10) {
-        lightWay("Да это верно");
+        lightWay();
+        setTimeout(() => {
+          console.log('yes of course');
+        },1500);
       } else {
-        badWay("В корне не верно");
+        badWay();
       }
     });
 
     choiceWay.then(
-      function(value) { 
-        console.log(value);
+      function() { 
+        console.log("это то что true");
       },
-      function(error) {
-        console.log(error);
+      function() {
+        console.log("это то что false");
       }
     );
 
