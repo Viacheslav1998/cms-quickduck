@@ -2,8 +2,42 @@
 import { ref, onMounted } from 'vue';
 
 export default {
-  
-}
+
+  setup() {
+    const rates = ref({
+      RUB: null,
+      USD: null,
+      EUR: null
+    });
+
+    const error = ref(null);
+
+    onMounted(async () => {
+      try {
+        const response = await fetch("https://nationalbank.kz/rss/rates_all.xml");
+        if(!response.ok) throw new Error('Ошибка загрузки данных');
+
+        const xml = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xml, "application/xml");
+
+        //извлечь
+        ['RUB', 'USD', 'EUR'].forEach((currency) => {
+          const item = xmlDoc.querySelector(`item title:contains("${currency}")`);
+          if (item) {
+            const rate = item.parentNode.querySelector('description').textContent;
+            rates.value[currency] = parseFloat(rate).toFixed(2);
+          }
+        });
+       } catch (err) {
+        error.value = "не удалось загрузить курсы валют.";
+        console.error(err);
+      } 
+    });
+
+    return {rates, error};
+  },
+};
 
 </script>
 <template>
