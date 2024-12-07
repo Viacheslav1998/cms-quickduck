@@ -75,10 +75,11 @@ export default defineComponent({
     });
 
     const path_to_image = ref(null);
-    const uploadedPath = ref('');
+    const uploadedPath = ref('данные которые тут будут');
 
     const handleFileChange = (event) => {
       path_to_image.value = event.target.files[0];
+      uploadedPath.value = path_to_image.value.name;
     }
 
     const uploadImage = async() => {
@@ -98,7 +99,6 @@ export default defineComponent({
 
         if (response.ok) {
           const result = await response.json();
-          uploadedPath.value = response.path_to_image;
           console.log(result);
         } else {
           const error = await response.json();
