@@ -26,17 +26,17 @@
         <div style="border: 1px solid sandybrown; margin: 30px 0 20px 0;"></div>
         <h3 style="color: white;">Изменить картинку</h3>
         <div class="d-flex flex-column">
-          <form @submit.prevent="handleImageUpload">
+          <form @submit.prevent="uploadImage">
             <div class="p-2">
               <label style="font-size: 16px;">обновить текущее изображение</label><br>
               <input 
                 type="file"
+                name="path_to_image"
                 @change="handleFileChange"
               />
               <br>
-              <p>this is test outload</p>
               <div v-if="uploadedPath">
-                <p>Файл загружен: {{ uploadedPath }}</p>
+                <p style="color: wheat;">Файл загружен: {{ uploadedPath }}</p>
               </div>
               <button class="custom-b2 green-b" type="submit">Обновить картинку</button>
             </div>
@@ -75,10 +75,40 @@ export default defineComponent({
     });
 
     const path_to_image = ref(null);
+    const uploadedPath = ref('');
 
-    function handleFileChange(event) {
+    const handleFileChange = (event) => {
       path_to_image.value = event.target.files[0];
     }
+
+    const uploadImage = async() => {
+      if (!path_to_image.value) {
+        showError('ты не выбрал картинку');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('path_to_image', path_to_image.value);
+
+      try {
+        const response = await fetch('http://quickduck.com/api/upload-image', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          uploadedPath.value = response.path_to_image;
+          console.log(result);
+        } else {
+          const error = await response.json();
+          console.log(error.error || 'ошибка при загрузке файла');
+        }
+      } catch (err) {
+        console.error('Ошибка сети: ', err);
+        console.log('ошибка сети. Проверь подключение.');
+      }
+    };
 
     // attention error
     function showError(message) {
@@ -124,6 +154,9 @@ export default defineComponent({
       close, 
       submitForm,
       path_to_image,
+      uploadedPath,
+      handleFileChange,
+      uploadImage
     };
   },
 });

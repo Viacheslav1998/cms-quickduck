@@ -63,7 +63,7 @@ export default {
         <span style="color:#000; background-color: #E6BF0B; padding: 5px; margin: 5px; border-radius: 5px; margin-top: 10px;"><b>только для личного использования | не для расспространения</b></span>
         <span style="color:#E6BF0B; background-color: #212121; padding: 5px; border-radius: 5px; margin-top: 10px;"><b>Development SilentStorm</b></span>
       </p>
-      <p style="margin: 0 5px; font-weight: bold; color: #212121">..2024</p>
+      <p style="margin: 0 5px; font-weight: bold; color: burlywood">development in progress... 2024</p>
     </div>
   </div>
 </template>
