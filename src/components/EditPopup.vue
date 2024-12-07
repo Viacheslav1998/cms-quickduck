@@ -76,6 +76,7 @@ export default defineComponent({
 
     const path_to_image = ref(null);
     const uploadedPath = ref('');
+    const newsId = 46;
 
     const handleFileChange = (event) => {
       path_to_image.value = event.target.files[0];
@@ -89,10 +90,10 @@ export default defineComponent({
       }
 
       const formData = new FormData();
-      formData.append('path_to_image', path_to_image.value);
+      formData.append('path_to_image', path_to_image.value || '');
 
       try {
-        const response = await fetch('http://quickduck.com/api/upload-image', {
+        const response = await fetch(`http://quickduck.com/api/upload-image/${newsId}`, {
           method: 'POST',
           body: formData,
         });
@@ -103,11 +104,12 @@ export default defineComponent({
           showSuccess('Успешно обновлено !');
         } else {
           const error = await response.json();
-          console.log(error.error || 'ошибка при загрузке файла');
+          showError('Ошибка при загрузке файла');
+          console.error(error.error || 'Ошибка при загрузке файла');
         }
       } catch (err) {
         console.error('Ошибка сети: ', err);
-        console.log('ошибка сети. Проверь подключение.');
+        showError('Ошибка сети. Проверь подключение.')
       }
     };
 
