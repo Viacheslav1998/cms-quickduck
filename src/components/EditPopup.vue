@@ -36,7 +36,7 @@
               />
               <br>
               <div v-if="uploadedPath">
-                <p style="color: wheat;">Файл загружен: {{ uploadedPath }}</p>
+                <p style="color: wheat;">{{ uploadedPath }}</p>
               </div>
               <button class="custom-b2 green-b" type="submit">Обновить картинку</button>
             </div>
@@ -75,11 +75,11 @@ export default defineComponent({
     });
 
     const path_to_image = ref(null);
-    const uploadedPath = ref('данные которые тут будут');
+    const uploadedPath = ref('');
 
     const handleFileChange = (event) => {
       path_to_image.value = event.target.files[0];
-      uploadedPath.value = path_to_image.value.name;
+      uploadedPath.value =  "Файл для загрузки: " + path_to_image.value.name;
     }
 
     const uploadImage = async() => {
@@ -100,6 +100,7 @@ export default defineComponent({
         if (response.ok) {
           const result = await response.json();
           console.log(result);
+          showSuccess('Успешно обновлено !');
         } else {
           const error = await response.json();
           console.log(error.error || 'ошибка при загрузке файла');
