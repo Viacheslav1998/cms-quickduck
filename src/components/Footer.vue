@@ -63,14 +63,14 @@ export default {
         <span style="color:#000; background-color: #E6BF0B; padding: 5px; margin: 5px; border-radius: 5px; margin-top: 10px;"><b>только для личного использования | не для расспространения</b></span>
         <span style="color:#E6BF0B; background-color: #212121; padding: 5px; border-radius: 5px; margin-top: 10px;"><b>Development SilentStorm</b></span>
       </p>
-      <p style="margin: 0 5px; font-weight: bold; color: burlywood">development in progress... 2024</p>
+      <p style="margin: 0 5px;  padding: 0 5px; font-weight: bold; color: white; background-color: #212121; border-radius: 5px; text-align: center;">development in progress... 2024</p>
     </div>
   </div>
 </template>
 <style scoped>
 
 .footer {
-  padding: 20px 10px 1px 10px;
+  padding: 20px 10px 15px 10px;
   margin-top: 20px;
   background-color: #a53131;
   color: white;
