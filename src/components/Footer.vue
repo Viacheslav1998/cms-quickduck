@@ -58,6 +58,12 @@ export default {
         </ul>
         <p v-else>Загрузка...</p>
       </div>
+      <div>
+        logo
+        logo
+        logo
+        451f
+      </div>
       <p style="margin: 5px; font-size: 18px;">интерессная панель управление сайтом | реализация многих идей</p>
       <p>
         <span style="color:#000; background-color: #E6BF0B; padding: 5px; margin: 5px; border-radius: 5px; margin-top: 10px;"><b>только для личного использования | не для расспространения</b></span>

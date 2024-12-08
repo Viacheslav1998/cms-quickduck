@@ -5,6 +5,13 @@
         <div class="d-flex flex-column">
           <h3>Редактировать Новость</h3>
           <div style="border: 1px solid sandybrown; margin: 0 0 20px 0;"></div>
+          
+          <h1>
+            <li v-for="item in news" :key="item.id">
+              {{ item.id }}
+            </li>
+          </h1>
+
           <form @submit.prevent="submitForm">
             <div class="p-2">
               <label>Название: </label><br>
@@ -74,9 +81,10 @@ export default defineComponent({
       desk: '',
     });
 
+    const news = ref('');
+
     const path_to_image = ref(null);
     const uploadedPath = ref('');
-    const newsId = 46;
 
     const handleFileChange = (event) => {
       path_to_image.value = event.target.files[0];
@@ -91,13 +99,16 @@ export default defineComponent({
 
       const formData = new FormData();
       formData.append('path_to_image', path_to_image.value || '');
+      
+      const currentId = props.newsItem.id
+      console.log(currentId);
+      return false;
 
       try {
         const response = await fetch(`http://quickduck.com/api/upload-image/${newsId}`, {
           method: 'POST',
           body: formData,
         });
-
         if (response.ok) {
           const result = await response.json();
           console.log(result);
@@ -153,6 +164,7 @@ export default defineComponent({
     };
 
     return {
+      news,
       formData, 
       close, 
       submitForm,
