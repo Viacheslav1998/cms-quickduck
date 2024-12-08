@@ -62,7 +62,6 @@
 import { defineComponent, ref, watch } from 'vue';
 import Swal from 'sweetalert2';
 
-
 export default defineComponent({
   name: 'EditPopup',
   props: {
@@ -74,7 +73,7 @@ export default defineComponent({
     'update',
   ],
   setup(props, { emit }) {
-    // form 1 data
+ 
     const formData = ref({
       name: '', 
       title: '',
@@ -98,14 +97,12 @@ export default defineComponent({
       }
 
       const formData = new FormData();
+      const currentId = props.newsItem.id;
+
       formData.append('path_to_image', path_to_image.value || '');
-      
-      const currentId = props.newsItem.id
-      console.log(currentId);
-      return false;
 
       try {
-        const response = await fetch(`http://quickduck.com/api/upload-image/${newsId}`, {
+        const response = await fetch(`http://quickduck.com/api/current-update-image/${currentId}`, {
           method: 'POST',
           body: formData,
         });
@@ -120,7 +117,7 @@ export default defineComponent({
         }
       } catch (err) {
         console.error('Ошибка сети: ', err);
-        showError('Ошибка сети. Проверь подключение.')
+        showError('Ошибка сети. Проверь подключение.');
       }
     };
 
