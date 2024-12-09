@@ -47,22 +47,40 @@ export default {
 </script>
 <template>
   <div class="container">
+    <h3 style="border-top: 1px solid gold; padding-top: 20px;">Мотивационный Баннер</h3>
+    <p style="color: silver;">Я бы мог сделать какой то переход - но у меня просто нет времени | а идеи есть всегда</p>
+    <div class="additional-unit">
+      <img src="/public/images/fone.jpg" alt="fone">
+    </div>
+  </div>
+
+  <div class="container">
+    <h3 style="border-top: 1px solid gold; padding-top: 20px; margin-top: 40px;">Внимание - Подвал</h3>
+    <p style="color: silver;">Подвалы нужны для поиска быстрой информации, о сайте или авторе, карта ссылки и т д...</p>
     <div class="footer"> 
-      <div class="currencies">
-        <p style="text-align: center; color: wheat; font-weight:100; font-family: Verdana;">курсы валют</p>
-        <p v-if="error">{{ error }}</p>
-        <ul v-else-if="rates.length">
-          <li v-for="(rate, index) in rates" :key="index">
-            <strong>{{ rate.title }}</strong>: {{ rate.description }}
-          </li>
-        </ul>
-        <p v-else>Загрузка...</p>
-      </div>
-      <div>
-        logo
-        logo
-        logo
-        451f
+      <div class="format-elem d-flex flex-row justify-content-around">
+        <div class="currencies">
+          <p style="text-align: center; color: wheat; font-weight:100; font-family: Verdana;">курсы валют</p>
+          <p v-if="error">{{ error }}</p>
+          <ul v-else-if="rates.length">
+            <li v-for="(rate, index) in rates" :key="index">
+              <strong>{{ rate.title }}</strong>: {{ rate.description }}
+            </li>
+          </ul>
+          <p v-else>Загрузка...</p>
+        </div>
+        <div>
+          <img class="ico" src="/public/ico/hn.png" alt="honey.ico">
+        </div>
+        <div>
+          <img class="ico2" src="/public/images/honey.jpg" alt="">
+        </div>
+        <div style="text-align: center;">
+          <a href="https://github.com/Viacheslav1998/cms-quickduck" style="color: white;">
+            <img class="ico2" src="/public/ico/hub.png" alt="gitHub"><br>
+            кто то просил сылку на репу
+          </a>
+        </div>
       </div>
       <p style="margin: 5px; font-size: 18px;">интерессная панель управление сайтом | реализация многих идей</p>
       <p>
@@ -74,6 +92,20 @@ export default {
   </div>
 </template>
 <style scoped>
+
+.additional-unit {
+  background-color: silver;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.additional-unit img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: top;
+}
 
 .footer {
   padding: 20px 10px 15px 10px;
@@ -92,5 +124,20 @@ export default {
   border-radius: 16px;
   color: #e6bf0b;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.ico {
+  border-radius: 20px;
+  padding: 10px;
+  background-color: wheat;
+  width: 150px;
+  height: 150px;
+}
+
+.ico2 {
+  border-radius: 20px;
+  padding: 10px;
+  width: 150px;
+  height: 150px;
 }
 </style>
