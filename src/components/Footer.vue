@@ -50,7 +50,7 @@ export default {
     <h3 style="border-top: 1px solid gold; padding-top: 20px;">Мотивационный Баннер</h3>
     <p style="color: silver;">Я бы мог сделать какой то переход - но у меня просто нет времени | а идеи есть всегда</p>
     <div class="additional-unit">
-      <img src="/public/images/fone.jpg" alt="fone">
+      <img src="/images/fone.jpg" alt="fone">
     </div>
   </div>
 
@@ -58,7 +58,7 @@ export default {
     <h3 style="border-top: 1px solid gold; padding-top: 20px; margin-top: 40px;">Внимание - Подвал</h3>
     <p style="color: silver;">Подвалы нужны для поиска быстрой информации, о сайте или авторе, карта ссылки и т д...</p>
     <div class="footer"> 
-      <div class="format-elem d-flex flex-row justify-content-around">
+      <div class="format-elem d-flex flex-row">
         <div class="currencies">
           <p style="text-align: center; color: wheat; font-weight:100; font-family: Verdana;">курсы валют</p>
           <p v-if="error">{{ error }}</p>
@@ -69,17 +69,18 @@ export default {
           </ul>
           <p v-else>Загрузка...</p>
         </div>
-        <div>
-          <img class="ico" src="/public/ico/hn.png" alt="honey.ico">
-        </div>
-        <div>
-          <img class="ico2" src="/public/images/honey.jpg" alt="">
-        </div>
-        <div style="text-align: center;">
-          <a href="https://github.com/Viacheslav1998/cms-quickduck" style="color: white;">
-            <img class="ico2" src="/public/ico/hub.png" alt="gitHub"><br>
-            кто то просил сылку на репу
-          </a>
+        <div class="box-elems d-flex justify-content-center flex-wrap p-2 ml-2">
+          <div>
+            <img class="ico" src="/ico/hn.png" alt="honey.ico">
+          </div>
+          <div>
+            <img class="ico2" src="/images/honey.jpg" alt="">
+          </div>
+          <div style="text-align: center;">
+            <a href="https://github.com/Viacheslav1998/cms-quickduck" style="color: white;">
+              <img class="ico2" src="/ico/hub.png" alt="gitHub">
+            </a>
+          </div>
         </div>
       </div>
       <p style="margin: 5px; font-size: 18px;">интерессная панель управление сайтом | реализация многих идей</p>
@@ -116,9 +117,8 @@ export default {
 }
 
 .currencies {
-  position: relative;
-  display: block;
   width: 170px;
+  height: 170px;
   padding: 20px 0 5px 0;
   background-color: #212121;
   border-radius: 16px;
@@ -126,18 +126,25 @@ export default {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.ico {
-  border-radius: 20px;
-  padding: 10px;
-  background-color: wheat;
-  width: 150px;
-  height: 150px;
+.box-elems {
+  border-radius: 18px;
+  background-color: #212121;
+  width: 170px;
 }
 
-.ico2 {
-  border-radius: 20px;
+.ico, .ico2 {
+  border-radius: 50px;
   padding: 10px;
-  width: 150px;
-  height: 150px;
+  width: 77px;
+  height: 77px;
+  transition: all 1s ease;
+  cursor: pointer;
+}
+.ico:hover {
+  background-color: orange;
+}
+
+.ico2:hover {
+  background-color: seagreen;
 }
 </style>
