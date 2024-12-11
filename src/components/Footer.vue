@@ -76,11 +76,15 @@ export default {
           <div>
             <img class="ico2" src="/images/honey.jpg" alt="">
           </div>
-          <div style="text-align: center;">
+          <div>
             <a href="https://github.com/Viacheslav1998/cms-quickduck" style="color: white;">
               <img class="ico2" src="/ico/hub.png" alt="gitHub">
             </a>
           </div>
+        </div>
+        <div class="box-elems d-flex justify-content-center flex-wrap p-2 ml-2">
+          <h3>Наши спонсоры:</h3>
+          <span>Лучший мед, да пчелы трудятся и сервера как ульи. нет связи? - а ты найди</span>
         </div>
       </div>
       <p style="margin: 5px; font-size: 18px;">интерессная панель управление сайтом | реализация многих идей</p>
