@@ -50,22 +50,12 @@ export default defineComponent({
 
         const data = await response.json();
         if (response.ok) {
-          Swal.fire({
-            title: 'Ура',
-            text: data.message,
-            icon: 'success',
-            confirmButtonText: 'Закрыть',
-          });
+          showSuccess('Обновлено!');
         }
         
       } catch (error) {
         if (response.ok) {
-          Swal.fire({
-            title: 'ошибка ! не удалось',
-            text: data.message,
-            icon: 'error',
-            confirmButtonText: 'Закрыть',
-          });
+          showError('ошибка ! не удалось!');
         }
         console.error('Ошибка при обновлении: ', error);
       }
@@ -83,30 +73,33 @@ export default defineComponent({
         const data = await response.json();
         if(data.status === 'success') {
           news.value = news.value.filter(item => item.id !== postId);
-          Swal.fire({
-            title: 'Удалено!',
-            text: data.message,
-            icon: 'success',
-            confirmButtonText: 'Закрыть',
-          });
+          showSuccess('Удалено');
         } else {
-          Swal.fire({
-            title: 'Ошибка',
-            text: data.message,
-            icon: 'error',
-            confirmButtonText: 'Закрыть',
-          });
+          showError('ошибка!');
         }
       } catch (error) {
         console.error('ошибка при удалении: ', error);
-        Swal.fire({
-          title: 'Ошибка',
-          text: error.message || 'что то пошло не так.',
-          icon: 'error',
-          confirmButtonText: 'Закрыть',
-        });
+        showError('Ошибка при удалении');
       }
     };
+
+    function showError(message) {
+      Swal.fire({
+        title: 'Ошибка',
+        text: message || 'что то пошло не так',
+        icon: 'error',
+        confirmButtonText: 'Закрыть',
+      });
+    }
+
+    function showSuccess(message) {
+      Swal.fire({
+        title: 'Успех',
+        text: message || 'сделано !',
+        icon: 'success',
+        confirmButtonText: 'Ок',
+      });
+    }
 
     onMounted(async () => {
       news.value = await getData();
