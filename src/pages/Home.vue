@@ -26,7 +26,7 @@ export default defineComponent({
     clearInterval(this.timer);
   }
 })
-console.log('123');
+
 </script>
 
 <template>

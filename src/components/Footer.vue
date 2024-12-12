@@ -1,5 +1,6 @@
 <script>
 import { ref, onMounted } from 'vue';
+import '/src/scripts/asxAwait.js';
 
 export default {
 
