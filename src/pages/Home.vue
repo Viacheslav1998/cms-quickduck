@@ -26,14 +26,11 @@ export default defineComponent({
     clearInterval(this.timer);
   }
 })
+console.log('123');
 </script>
 
 <template>
   <div class="container">
-  <div>
-    <div v-if="successMessage" class="alert alert-success">{{ successMessage }}</div>
-    <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-  </div>
     <div class="name-page">
       <h2>Главная</h2>
     </div>

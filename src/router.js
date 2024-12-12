@@ -7,6 +7,7 @@ import TestStaticData from './testPages/testStaticData.vue';
 import TestPromise from './testPages/testPromise.vue';
 import TestClosure from './testPages/testClosure.vue';
 import TestRecursion from './testPages/testRecursion.vue';
+import ErrorPage from './pages/404.vue';
 
 const routes = [
   { path: '/', component: Home },
@@ -16,7 +17,8 @@ const routes = [
   { path: '/test-static', component: TestStaticData },
   { path: '/test-async', component: TestPromise },
   { path: '/test-closure', component: TestClosure },
-  { path: '/test-recursion', component: TestRecursion }
+  { path: '/test-recursion', component: TestRecursion },
+  { path: '/404', component: ErrorPage },
 ];
 
 const router = createRouter({
