@@ -18,7 +18,7 @@ const routes = [
   { path: '/test-async', component: TestPromise },
   { path: '/test-closure', component: TestClosure },
   { path: '/test-recursion', component: TestRecursion },
-  { path: '/404', component: ErrorPage },
+  { path: '/:pathMatch(.*)*', component: ErrorPage },
 ];
 
 const router = createRouter({
