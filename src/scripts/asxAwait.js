@@ -10,7 +10,7 @@ async function f3() {
 // 
 async function f4() {
   try {
-    const z = await Promise.reject(30);
+    const z = await Promise.resolve(30);
     setTimeout(() => {
       console.log('ready');
       console.log(z);
