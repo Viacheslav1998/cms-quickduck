@@ -18,7 +18,7 @@ export default defineComponent({
         <RouterLink to="/add" class="custom-href">Добавить новость</RouterLink>
         <RouterLink to="/news" class="custom-href">Управления новостями</RouterLink>
         <RouterLink to="/add-person" class="custom-href">Добавить пользователя</RouterLink>
-        <RouterLink to="/users" class="custom-href">Управление пользователями</RouterLink>
+        <RouterLink to="/persons" class="custom-href">Управление пользователями</RouterLink>
       </nav>
    </div>
 </template>
