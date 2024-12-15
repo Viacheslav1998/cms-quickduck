@@ -3,6 +3,7 @@ import Home from './pages/Home.vue';
 import AddNews from './pages/AddNews.vue';
 import News from './pages/News.vue';
 import Test from './testPages/testAttention.vue';
+import addPerson from './pages/addPerson.vue';
 import TestStaticData from './testPages/testStaticData.vue';
 import TestPromise from './testPages/testPromise.vue';
 import TestClosure from './testPages/testClosure.vue';
@@ -12,6 +13,7 @@ import ErrorPage from './pages/404.vue';
 const routes = [
   { path: '/', component: Home },
   { path: '/add', component: AddNews },
+  { path: '/add-person', component: addPerson },
   { path: '/news', component: News },
   { path: '/test', component: Test },
   { path: '/test-static', component: TestStaticData },
