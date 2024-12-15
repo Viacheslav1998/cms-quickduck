@@ -9,16 +9,22 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <h1>Добавление пользователя</h1>
-    <p style="color: white;">Страница в разработке ...</p>
+    <div class="name-page">
+      <h2>Добавление пользователя</h2>
+    </div>
     <div class="test123">
-      <p>будет ли тут пока что какой нибудь контент для наполнения чего то что бы что то было то что бы что то с чем то</p>
+      <p style="color: white;">Страница в разработке ...</p>
     </div>
   </div>
 </template>
 
 <style scoped>
-
+.name-page {
+  margin-top: 20px;
+  padding: 20px;
+  color: silver;
+  border: 1px solid grey;
+}
 .test123 {
   background-color: sandybrown;
   height: 800px;
