@@ -197,7 +197,6 @@ export default defineComponent({
   color: white;
   background-color: #3C3C3C;
 }
-
 .imagen {
   background-color: #837969;
   padding: 5px 5px 5px 5px;
