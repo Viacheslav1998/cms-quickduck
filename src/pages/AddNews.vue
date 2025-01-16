@@ -25,7 +25,7 @@ export default defineComponent({
     const submitForm = async () => {
 
       // validation
-      if(!name.value || !title.value || !desk.value) {
+      if(!name.value || !title.value || !desk.value || !tags.value) {
         responseMessage.value = 'Все поля обязательны для заполнения';
         responseStatus.value = 'alert-danger';
         return;
@@ -66,6 +66,7 @@ export default defineComponent({
       formData.append('title', title.value);
       formData.append('desk', desk.value);
       formData.append('path_to_image', imageUrl);
+      formData.append('name_tag', name_tag.value);
 
       try {
         const response = await fetch('http://quickduck.com/api/news', {
@@ -96,6 +97,7 @@ export default defineComponent({
         title.value = '';
         desk.value = '';
         path_to_image.value = 'null';
+        name_tag.value = '';
 
       } catch (error) {
         responseMessage.value = 'Ошибка при отправке данных.';
@@ -128,13 +130,13 @@ export default defineComponent({
 
         <div class="form-group">
           <label for="name">Названия Новости</label>
-          <input v-model="name" type="text" class="form-control" id="name" aria-describedby="name" required>
+          <input v-model="name" type="text" class="form-control" id="name" aria-describedby="name" placeholder="писать тут" required>
           <small id="name" class="form-text text-muted">То что привлечет внимание</small>
         </div>  
 
         <div class="form-group">
           <label for="name">Теги - пиши через запятую</label>
-          <input v-model="name_tag" type="text" class="form-control" id="tags" aria-describedby="tags" required>
+          <input v-model="name_tag" type="text" class="form-control" id="tags" aria-describedby="tags" placeholder="писать тут" required>
           <small id="tags" class="form-text text-muted">По тегам можно быстро найти или сгруппировать дынные</small>
         </div>  
 
@@ -146,7 +148,7 @@ export default defineComponent({
 
         <div class="form-group">
           <label for="title">Описание Новости</label>
-          <input v-model="title" type="title" class="form-control" id="title" required>
+          <input v-model="title" type="title" class="form-control" id="title" placeholder="писать тут" required>
           <small id="title" class="form-text text-muted">Описание должно быть не большим - достаточно 255 символов - коротко о главном</small>
         </div>
         <div>
