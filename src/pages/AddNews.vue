@@ -13,6 +13,7 @@ export default defineComponent({
     const title = ref('');
     const desk = ref('');
     const path_to_image = ref(null);
+    const name_tag = ref('');
 
     const responseMessage = ref('');
     const responseStatus = ref('');
@@ -107,6 +108,7 @@ export default defineComponent({
       title,
       desk,
       path_to_image,
+      name_tag,
       responseMessage,
       responseStatus,
       onFileChange,
@@ -126,8 +128,14 @@ export default defineComponent({
 
         <div class="form-group">
           <label for="name">Названия Новости</label>
-          <input v-model="name" type="name" class="form-control" id="name" aria-describedby="name" required>
+          <input v-model="name" type="text" class="form-control" id="name" aria-describedby="name" required>
           <small id="name" class="form-text text-muted">То что привлечет внимание</small>
+        </div>  
+
+        <div class="form-group">
+          <label for="name">Теги - пиши через запятую</label>
+          <input v-model="name_tag" type="text" class="form-control" id="tags" aria-describedby="tags" required>
+          <small id="tags" class="form-text text-muted">По тегам можно быстро найти или сгруппировать дынные</small>
         </div>  
 
         <div class="form-group">
