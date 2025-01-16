@@ -65,9 +65,9 @@ export default defineComponent({
       formData.append('name', name.value);
       formData.append('title', title.value);
       formData.append('desk', desk.value);
-      formData.append('path_to_image', imageUrl);
       formData.append('name_tag', name_tag.value);
-
+      formData.append('path_to_image', imageUrl);
+      
       try {
         const response = await fetch('http://quickduck.com/api/news', {
           method: 'POST',
