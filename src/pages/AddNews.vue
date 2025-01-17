@@ -13,7 +13,7 @@ export default defineComponent({
     const title = ref('');
     const desk = ref('');
     const path_to_image = ref(null);
-    const name_tag = ref('');
+    const tags_name = ref('');
 
     const responseMessage = ref('');
     const responseStatus = ref('');
@@ -65,7 +65,7 @@ export default defineComponent({
       formData.append('name', name.value);
       formData.append('title', title.value);
       formData.append('desk', desk.value);
-      formData.append('name_tag', name_tag.value);
+      formData.append('tags_name', tags_name.value);
       formData.append('path_to_image', imageUrl);
       
       try {
@@ -97,7 +97,7 @@ export default defineComponent({
         title.value = '';
         desk.value = '';
         path_to_image.value = 'null';
-        name_tag.value = '';
+        tags_name.value = '';
 
       } catch (error) {
         responseMessage.value = 'Ошибка при отправке данных.';
@@ -110,7 +110,7 @@ export default defineComponent({
       title,
       desk,
       path_to_image,
-      name_tag,
+      tags_name,
       responseMessage,
       responseStatus,
       onFileChange,
@@ -136,7 +136,7 @@ export default defineComponent({
 
         <div class="form-group">
           <label for="name">Теги - пиши через запятую</label>
-          <input v-model="name_tag" type="text" class="form-control" id="tags" aria-describedby="tags" placeholder="писать тут" required>
+          <input v-model="tags_name" type="text" class="form-control" id="tags" aria-describedby="tags" placeholder="писать тут" required>
           <small id="tags" class="form-text text-muted">По тегам можно быстро найти или сгруппировать дынные</small>
         </div>  
 
