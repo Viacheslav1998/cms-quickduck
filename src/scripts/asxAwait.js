@@ -22,7 +22,6 @@ async function f4() {
     })
   }
 }
-f4();
 
 // 
 
