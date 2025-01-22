@@ -39,7 +39,9 @@ export default defineComponent({
       try {
         const response = await fetch(`http://quickduck.com/api/news/${updatedItem.id}`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify(updatedItem),
         });
 
@@ -64,8 +66,15 @@ export default defineComponent({
     // delete news = id
     const deleteNews = async(postId) => {
       try {
+
+        console.log(`URL: http://quickduck.com/api/news/${postId}`);
+
+
         const response = await fetch(`http://quickduck.com/api/news/${postId}`,{
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
         if(!response.ok) {
           throw new Error('Не удалось удалить новость');
@@ -113,7 +122,6 @@ export default defineComponent({
       openEditPopup,
       updateNews,
       imageFile,
-      deleteNews,
     };
   },
 });
