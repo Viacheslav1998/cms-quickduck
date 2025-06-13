@@ -153,7 +153,7 @@ export default defineComponent({
         </div>
         <div>
           <editor
-            v-model="desk"
+            v-model="desc"
             api-key="0dlmagrtkkct366u3iv3bopx8ha1foy0mqtudu6p0tb6p0wr"
             :init="{
               toolbar_mode: 'sliding',
