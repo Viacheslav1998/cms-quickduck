@@ -11,7 +11,7 @@ export default defineComponent({
   setup() {
     const name = ref('');
     const title = ref('');
-    const desk = ref('');
+    const desc = ref('');
     const path_to_image = ref(null);
     const tags = ref('');
 
@@ -25,7 +25,7 @@ export default defineComponent({
     const submitForm = async () => {
 
       // validation
-      if(!name.value || !title.value || !desk.value || !tags.value) {
+      if(!name.value || !title.value || !desc.value || !tags.value) {
         responseMessage.value = 'Все поля обязательны для заполнения';
         responseStatus.value = 'alert-danger';
         return;
@@ -64,7 +64,7 @@ export default defineComponent({
       const formData = new FormData();
       formData.append('name', name.value);
       formData.append('title', title.value);
-      formData.append('desk', desk.value);
+      formData.append('desc', desc.value);
       formData.append('tags', tags.value);
       formData.append('path_to_image', imageUrl);
       
@@ -95,7 +95,7 @@ export default defineComponent({
         // clear form 
         name.value = '';
         title.value = '';
-        desk.value = '';
+        desc.value = '';
         path_to_image.value = 'null';
         tags.value = '';
 
@@ -108,7 +108,7 @@ export default defineComponent({
     return {
       name,
       title,
-      desk,
+      desc,
       path_to_image,
       tags,
       responseMessage,
